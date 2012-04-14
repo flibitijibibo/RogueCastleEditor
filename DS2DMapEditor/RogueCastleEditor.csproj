@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2EB931BC-6FC9-49DA-8964-C4E510EB3231}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RogueCastleEditor</RootNamespace>
+    <AssemblyName>RogueCastleEditor</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DS2DEngine">
+      <HintPath>..\..\DS2DEngine\bin\x86\Debug\DS2DEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="InputSystem">
+      <HintPath>..\..\DLLs\InputSystem\InputSystem\bin\x86\Debug\InputSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="SpriteSystem, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLLs\SpriteSystem\SpriteSystem\bin\Debug\SpriteSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="DirectoriesWindow.xaml.cs">
+      <DependentUpon>DirectoriesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditorConfig.cs" />
+    <Compile Include="Controls\MapTabControl.cs" />
+    <Compile Include="Controls\XnaControls\EnemyDisplayXnaControl.cs" />
+    <Compile Include="MapObjects\EnemyMapObject.cs" />
+    <Compile Include="MapObjects\IRoomPropertiesObj.cs" />
+    <Compile Include="MapObjects\MapObjContainer.cs" />
+    <Compile Include="MapObjects\GridObj.cs" />
+    <Compile Include="Controls\IControl.cs" />
+    <Compile Include="MapObjects\IPropertiesObj.cs" />
+    <Compile Include="ListViewManager\DragAdorner.cs" />
+    <Compile Include="ListViewManager\ListViewDragDropManager.cs" />
+    <Compile Include="ListViewManager\MouseUtilities.cs" />
+    <Compile Include="Controls\ObjTreeControl.cs" />
+    <Compile Include="Controls\PropertiesControl.cs" />
+    <Compile Include="MapObjects\MapSpriteObj.cs" />
+    <Compile Include="Controls\SpriteListControl.cs" />
+    <Compile Include="MapObjects\MapTriggerObj.cs" />
+    <Compile Include="MapObjects\RoomObj.cs" />
+    <Compile Include="Controls\OutputControl.cs" />
+    <Compile Include="ToolObjects\PlayerPlacementTool.cs" />
+    <Compile Include="MapObjects\PlayerStartObj.cs" />
+    <Compile Include="ToolObjects\RoomTool.cs" />
+    <Compile Include="ToolObjects\ScaleToolObj.cs" />
+    <Compile Include="ToolObjects\RotateToolObj.cs" />
+    <Compile Include="TabControlManager\DragDropHelper.cs" />
+    <Compile Include="TabControlManager\DraggedAdorner.cs" />
+    <Compile Include="TabControlManager\InsertionAdorner.cs" />
+    <Compile Include="TabControlManager\Utilities.cs" />
+    <Compile Include="ToolObjects\SelectionToolObj.cs" />
+    <Compile Include="Controls\ToolbarControl.cs" />
+    <Compile Include="Controls\XnaControls\MapDisplayXnaControl.cs" />
+    <Compile Include="MapObjects\CollHullObj.cs" />
+    <Compile Include="Consts.cs" />
+    <Compile Include="Hosting Stuff\GraphicsDeviceEventArgs.cs" />
+    <Compile Include="Hosting Stuff\GraphicsDeviceService.cs" />
+    <Compile Include="Hosting Stuff\HwndMouseEventArgs.cs" />
+    <Compile Include="Hosting Stuff\HwndMouseState.cs" />
+    <Compile Include="Hosting Stuff\NativeMethods.cs" />
+    <Compile Include="Hosting Stuff\GraphicsDeviceControl.cs" />
+    <Compile Include="Controls\XnaControls\SpriteDisplayXnaControl.cs" />
+    <Compile Include="ToolObjects\RectToolObj.cs" />
+    <Compile Include="ToolObjects\ToolObj.cs" />
+    <Compile Include="Controls\XnaControls\XnaControl.cs" />
+    <Compile Include="UndoManager\UndoAddSprite.cs" />
+    <Compile Include="UndoManager\UndoAction.cs" />
+    <Compile Include="UndoManager\UndoManager.cs" />
+    <Compile Include="UndoManager\UndoObjMovement.cs" />
+    <Compile Include="UndoManager\UndoObjRotation.cs" />
+    <Compile Include="UndoManager\UndoObjScale.cs" />
+    <Compile Include="UndoManager\UndoObjDelete.cs" />
+    <Page Include="DirectoriesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="RectangleSelection.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ResetZoomTool.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SelectionTool.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="RotationTool.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ScaleTool.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="PlayerStartTool.jpg" />
+    <Resource Include="TriggerPlacementTool.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="RoomTool.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DS2DMapEditorLinker\RogueCastleEditorLinker.csproj">
+      <Project>{AE04DB1B-F2DD-42EC-8CB2-8A72AF4A8D7A}</Project>
+      <Name>RogueCastleEditorLinker</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

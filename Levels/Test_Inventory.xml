@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Map>
+  <Spritesheet Name="inventorySpritesheet" />
+  <Layer Name="Game Layer" Index="0">
+    <GameObject Type="SpriteObj" SpriteName="RingSlot" Name="RingSlot1" X="-600" Y="60" Width="45" Height="48" ScaleX="1" ScaleY="1" Rotation="0" Tag="" />
+    <GameObject Type="SpriteObj" SpriteName="WeaponSlot" Name="WeaponSlot1" X="-600" Y="-120" Width="73" Height="129" ScaleX="1" ScaleY="1" Rotation="0" Tag="" />
+    <GameObject Type="SpriteObj" SpriteName="WeaponSlot" Name="WeaponSlot2" X="-360" Y="-120" Width="73" Height="129" ScaleX="1" ScaleY="1" Rotation="0" Tag="" />
+    <GameObject Type="SpriteObj" SpriteName="HeadSlot" Name="HeadSlot" X="-480" Y="-240" Width="75" Height="74" ScaleX="1" ScaleY="1" Rotation="0" Tag="" />
+    <GameObject Type="SpriteObj" SpriteName="BodySlot" Name="BodySlot" X="-480" Y="-120" Width="74" Height="102" ScaleX="1" ScaleY="1" Rotation="0" Tag="" />
+    <GameObject Type="SpriteObj" SpriteName="RingSlot" Name="RingSlot2" X="-360" Y="60" Width="45" Height="48" ScaleX="1" ScaleY="1" Rotation="0" Tag="" />
+    <GameObject Type="SpriteObj" SpriteName="FootSlot" Name="FootSlot" X="-480" Y="120" Width="76" Height="77" ScaleX="1" ScaleY="1" Rotation="0" Tag="" />
+    <GameObject Type="SpriteObj" SpriteName="HandSlot" Name="HandSlot" X="-480" Y="0" Width="76" Height="76" ScaleX="1" ScaleY="1" Rotation="0" Tag="" />
+  </Layer>
+</Map>

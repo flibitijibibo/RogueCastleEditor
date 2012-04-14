@@ -1,0 +1,15 @@
+relre:.orig
+relre:.suo
+relre:.bak
+relre:.obj
+relre:.swf
+relre:.user
+relre:.sln
+relre:~
+relre:Thumbs.db
+relre:bin/*.*
+relre:obj/*.*
+relre:lib/*.*
+relre:ArtAssets/*.*
+relre:AudioAssets/*.*
+relre:Local/*.*

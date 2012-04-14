@@ -1,0 +1,254 @@
+﻿<!--
+// MainWindow.xaml
+//
+// Copyright 2011, Nick Gravelyn.
+// Licensed under the terms of the Ms-PL: http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
+-->
+
+<Window x:Class="RogueCastleEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:RogueCastleEditor"
+        xmlns:dd="clr-namespace:DragDropListBox"
+        Title="Rogue Castle Editor - New Map" Height="1050" Width="1680">
+
+    <!-- Style for Drag and Drop TabItem Adorner-->
+    <Window.Resources>
+        <DataTemplate x:Key="Local_TabItemDragTemplate">
+            <Border CornerRadius="1" BorderBrush="Gray" BorderThickness="1" Background="White">
+                <TextBlock Margin="5" Text="{Binding Path=Header}" />
+            </Border>
+        </DataTemplate>
+
+        <Style x:Key="TabToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Background" Value="lightGray"/>
+
+            <Setter Property="Padding" Value="3,3,3,3" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}"
+                             xmlns:MS_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
+                        <MS_Themes:ButtonChrome x:Name="Chrome"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}"
+                            RenderMouseOver="{TemplateBinding IsMouseOver}"
+                            RenderPressed="{TemplateBinding IsPressed}"
+                            RenderDefaulted="{TemplateBinding Button.IsDefaulted}"
+                            SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          Margin="{TemplateBinding Padding}"
+                          RecognizesAccessKey="True"
+                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </MS_Themes:ButtonChrome>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="RenderPressed" TargetName="Chrome" Value="true"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="#FF41B8F2" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <!--                                        -->
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="1">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="17" />
+                <ColumnDefinition Width="183" />
+                <ColumnDefinition Width="35" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="250" />
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="200" />
+            </Grid.RowDefinitions>
+            
+            <TabControl Grid.ColumnSpan="2">
+                <TabItem Header="Object Viewer">
+                    <my:ObjTreeControl x:Name="XAML_objTreeControl">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="150" Header="Objects" DisplayMemberBinding="{Binding Name}"  />
+                            </GridView>
+                        </ListView.View>
+                    </my:ObjTreeControl>
+                </TabItem>
+            </TabControl>
+            <TabControl Grid.Row="1" Grid.ColumnSpan="2">
+                <TabItem Header="Room Object Viewer">
+                </TabItem>
+            </TabControl>
+
+            <my:ToolbarControl Grid.Column="2" Grid.RowSpan="2" x:Name="XAML_toolBarControl" >
+                <ToggleButton Width="25" Height="25" Margin="5,30,5,0" Click="ToolBar_Clicked" IsChecked="False" 
+                              Tag="RectangleTool" Name="XAML_ToolBarRect"
+                              ToolTip="Collision Hull Tool - Creates world collision boxes that interact with physics objects."
+                              Style="{StaticResource TabToggleButtonStyle}">
+                    <ToggleButton.Content>
+                        <Image Source="RectangleSelection.jpg"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <ToggleButton Width="25" Height="25" Margin="5,5,5,0" Click="ToolBar_Clicked" IsChecked="False" 
+                              Tag="RotationTool" Name="XAML_ToolbarRotate"
+                              ToolTip="Rotation Tool - Rotates physics objects in the world. Their collision boxes are not rotated."
+                              Style="{StaticResource TabToggleButtonStyle}">
+                    <ToggleButton.Content>
+                        <Image Source="RotationTool.jpg"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <ToggleButton Width="25" Height="25" Margin="5,5,5,0" Click="ToolBar_Clicked" IsChecked="False" 
+                              Tag="ScaleTool" Name="XAML_ToolbarScale"
+                              ToolTip="Scale Tool - Scales physics objects in the world along with their collision boxes."
+                              Style="{StaticResource TabToggleButtonStyle}">
+                    <ToggleButton.Content>
+                        <Image Source="ScaleTool.jpg"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <ToggleButton Width="25" Height="25" Margin="5,20,5,0" Click="ToolBar_Clicked" IsChecked="False" 
+                              Tag="PlayerTool" Name="XAML_ToolbarPlayer"
+                              ToolTip="Player Placement Tool - Sets the starting location for the player."
+                              Style="{StaticResource TabToggleButtonStyle}">
+                    <ToggleButton.Content>
+                        <Image Source="PlayerStartTool.jpg"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <!--<ToggleButton Width="25" Height="25" Margin="5,5,5,0" Click="ToolBar_Clicked" IsChecked="False" 
+                              Tag="TriggerTool"
+                              ToolTip="Trigger Placement Tool - Creates a trigger object at the selected position.">
+                    <ToggleButton.Content>
+                        <Image Source="TriggerPlacementTool.jpg"/>
+                    </ToggleButton.Content>
+                </ToggleButton>-->
+                <ToggleButton Width="25" Height="25" Margin="5,20,5,0" Click="ToolBar_Clicked" IsChecked="False" 
+                              Tag="RoomTool" Name="XAML_ToolBarRoom"
+                              ToolTip="Room Tool - Creates and modifies rooms for the player to move around in."
+                              Style="{StaticResource TabToggleButtonStyle}">
+                    <ToggleButton.Content>
+                        <Image Source="RoomTool.jpg"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <ToggleButton x:Name="XAML_resetZoomTool" Width="25" Height="25" Margin="5,5,5,0" Click="ResetZoomTool_Clicked" IsChecked="False" 
+                              ToolTip="Zoom Reset Tool - Sets the grid zoom back to default value 1.0"
+                              Style="{StaticResource TabToggleButtonStyle}">
+                    <ToggleButton.Content>
+                        <Image Source="ResetZoomTool.jpg"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+            </my:ToolbarControl>
+            
+            <!--   MAP TAB CONTROL  -->
+            <my:MapTabControl Grid.Column="3" x:Name="XAML_mapTabControl"
+                              dd:DragDropHelper.IsDragSource="True"
+                              dd:DragDropHelper.IsDropTarget="True"
+                              dd:DragDropHelper.DragDropTemplate="{StaticResource Local_TabItemDragTemplate}">
+                <TabControl.ItemContainerStyle>
+                    <Style TargetType="{x:Type TabItem}">
+                        <Setter Property="DataContext"
+                                                Value="{Binding RelativeSource={RelativeSource Self}}" />
+                    </Style>
+                </TabControl.ItemContainerStyle>
+                <TabControl.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Add Foreground Layer" Tag="AddForeground" Click="MapTabControl_Click"/>
+                        <MenuItem Header="Add Background Layer" Tag="AddBackground" Click="MapTabControl_Click"/>
+                        <MenuItem Header="Remove Selected Layer" Tag="RemoveLayer" Click="MapTabControl_Click"/>
+                    </ContextMenu>
+                </TabControl.ContextMenu>
+                <TabItem Header="Game Layer" FontWeight="Bold">
+                    <my:MapDisplayXnaControl x:Name="XAML_mapDisplayXnaControl" />
+                </TabItem>
+            </my:MapTabControl>
+            <!--                   -->
+            <TabControl Grid.Column="4" Grid.RowSpan="2">
+                <TabItem Header="Object Properties">
+                    <my:PropertiesControl x:Name="XAML_propertiesControl" Margin="5,20,5,5"/>
+                </TabItem>
+            </TabControl>
+
+
+            <TabControl Grid.Column="5" BorderThickness="4" Grid.RowSpan="2">
+                <TabItem Header="Sprites">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="200"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <ScrollViewer Grid.Row="0" Margin="0,0,0,5">
+                            <my:SpriteListControl x:Name="XAML_spriteList" Background="White" />
+                        </ScrollViewer>
+                        <ScrollViewer Grid.Row="2" Grid.ColumnSpan="2" Name="XAML_spriteDisplayScroller" ScrollChanged="XAML_spriteDisplayScroller_ScrollChanged">
+                            <my:SpriteDisplayXnaControl x:Name="XAML_spriteDisplayXnaControl"/>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Enemies">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="200"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <ScrollViewer Grid.Row="0" Margin="0,0,0,5">
+                            <!--<my:SpriteListControl x:Name="XAML_spriteList" Background="White" /> -->
+                        </ScrollViewer>
+                        <ScrollViewer Grid.Row="2" Grid.ColumnSpan="2">
+                            <my:EnemyDisplayXnaControl x:Name="XAML_enemyDisplayXnaControl" Width="217" Height="769" />
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+
+            <TabControl Grid.Column="3" Grid.Row="1">
+                <TabItem Header="Output">
+                    <my:OutputControl x:Name="XAML_OutputPanel" />
+                </TabItem>
+            </TabControl>
+        </Grid>
+        
+        <!-- Add a placeholder menu to show that you can build great UI around your XNA rendered content -->
+        <Menu Grid.Row="0">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" Click="NewButton_Clicked" />
+                <MenuItem Header="_Open" Click="OpenButton_Clicked"/>
+                <MenuItem Header="_Save" Click="SaveButton_Clicked"/>
+                <MenuItem Header="Save _As" Click="SaveAsButton_Clicked" />
+                <MenuItem Header="E_xit" Click="ExitButton_Clicked"/>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Grid">
+                    <MenuItem Name="XAML_displayGridMenuItem"  Header="_Show Grid" IsCheckable="True" IsChecked="True" Click="DisplayGrid_Clicked" />
+                    <MenuItem Name="XAML_snapGridMenuItem" Header="S_nap to Grid" IsCheckable="True" IsChecked="True" Click="SnapGrid_Clicked" />
+                    <MenuItem Name="XAML_gridPropertiesMenuItem" Header="Grid _Properties" />
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Layers" />
+            <MenuItem Header="_Project">
+                <MenuItem Header="_Directories" Click="Directories_Clicked" />
+            </MenuItem>
+            <MenuItem Header="_Window" />
+            <MenuItem Header="_Help" />
+        </Menu>
+        
+    </Grid>
+</Window>

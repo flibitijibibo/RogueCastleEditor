@@ -95,7 +95,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DS2DMapEditorContent\DS2DMapEditorContent.contentproj">
+    <ProjectReference Include="..\DS2DMapEditorContent\RogueCastleEditorContent.contentproj">
       <Project>{F26F3E70-E060-47C9-8230-365624B98F24}</Project>
       <Name>DS2DMapEditorContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>

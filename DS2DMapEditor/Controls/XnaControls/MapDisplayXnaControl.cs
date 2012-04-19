@@ -648,40 +648,40 @@ namespace RogueCastleEditor
             if (obj is EnemyMapObject)
             {
                 if (obj.Name == null)
-                    obj.Name = "Enemy_Object " + this.ObjectList.Count;
+                    obj.Name = "Enemy_Obj " + this.ObjectList.Count;
                 addToPhysicsManager = true;
             }
             else if (obj is MapObjContainer)
             {
                 if (obj.Name == null)
-                    obj.Name = "Container_Object " + this.ObjectList.Count;
+                    obj.Name = "Container_Obj " + this.ObjectList.Count;
                 addToPhysicsManager = true;
             }
             else if (obj is MapSpriteObj)
             {
                 if (obj.Name == null)
-                    obj.Name = "Sprite_Object " + this.ObjectList.Count;
+                    obj.Name = "Sprite_Obj " + this.ObjectList.Count;
                 addToPhysicsManager = true;
             }
             else if (obj is RoomObj)
             {
                 if (obj.Name == null)
-                    obj.Name = "Room_Object " + this.RoomObjectList.Count;
+                    obj.Name = "Room_Obj " + this.RoomObjectList.Count;
             }
             else if (obj is CollHullObj)
             {
                 if (obj.Name == null)
-                    obj.Name = "Collision_Hull " + this.ObjectList.Count;
+                    obj.Name = "Coll_Hull" + this.ObjectList.Count;
             }
             else if (obj is PlayerStartObj)
             {
                 if (obj.Name == null)
-                    obj.Name = "Player_Start_Object";
+                    obj.Name = "Player_Start_Obj";
             }
             else
             {
                 if (obj.Name == null)
-                    obj.Name = "Game_Object " + this.ObjectList.Count;
+                    obj.Name = "Game_Obj " + this.ObjectList.Count;
             }
 
             if (overridePosition == false)

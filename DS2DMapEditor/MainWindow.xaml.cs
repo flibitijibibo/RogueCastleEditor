@@ -488,84 +488,41 @@ namespace RogueCastleEditor
                 writer.WriteEndElement();
             }
 
-            foreach (RoomObj obj in XAML_mapDisplayXnaControl.RoomObjectList)
+            foreach (RoomObj room in XAML_mapDisplayXnaControl.RoomObjectList)
             {
                 writer.WriteStartElement("RoomObject");
-                writer.WriteAttributeString("Name", obj.Name);
-                writer.WriteAttributeString("X", obj.X.ToString());
-                writer.WriteAttributeString("Y", obj.Y.ToString());
-                writer.WriteAttributeString("Width", obj.Width.ToString());
-                writer.WriteAttributeString("Height", obj.Height.ToString());
-                writer.WriteAttributeString("ScaleX", obj.ScaleX.ToString());
-                writer.WriteAttributeString("ScaleY", obj.ScaleY.ToString());
-                writer.WriteAttributeString("SelectionMode", obj.SelectionMode.ToString());
-                writer.WriteEndElement();
-            }
-            
-            bool displayPlayerStartWarning = true;
+                writer.WriteAttributeString("Name", room.Name);
+                writer.WriteAttributeString("X", room.X.ToString());
+                writer.WriteAttributeString("Y", room.Y.ToString());
+                writer.WriteAttributeString("Width", room.Width.ToString());
+                writer.WriteAttributeString("Height", room.Height.ToString());
+                writer.WriteAttributeString("ScaleX", room.ScaleX.ToString());
+                writer.WriteAttributeString("ScaleY", room.ScaleY.ToString());
+                writer.WriteAttributeString("SelectionMode", room.SelectionMode.ToString());
 
-            for (int i = 0; i < this.GlobalLayerList.Count; i++)
-            {
-                writer.WriteStartElement("Layer");
-                writer.WriteAttributeString("Name", (XAML_mapTabControl.Items[i] as TabItem).Header.ToString());
-                writer.WriteAttributeString("Index", i.ToString());
-               
-
-                foreach (GameObj obj in this.GlobalLayerList[i])
+                foreach (GameObj obj in room.TouchingObjList)
                 {
-                    string type = "GameObject";
+                    string type = "GameObj";
+                    string doorPos = "NULL";
                     if (obj is CollHullObj)
                     {
                         type = "CollHullObj";
                         if ((obj as CollHullObj).IsTrigger == true)
                         {
-                            if (obj.Name.ToLower().IndexOf("chest") == 0)
-                                type = "ChestObj";
+                            type = "DoorObj";
+                            if (obj.X == room.X)
+                                doorPos = "Left";
+                            else if (obj.Y == room.Y)
+                                doorPos = "Top";
+                            else if ((obj.X + obj.Width) == (room.X + room.Width))
+                                doorPos = "Right";
                             else
-                                type = "TriggerObj";
+                                doorPos = "Bottom";
                         }
-                    }
-                    else if (obj is EnemyMapObject)
-                    {
-                        type = "EnemyObj";
-                    }
-                    else if (obj is MapObjContainer)
-                    {
-                        if ((obj as MapObjContainer).IsCollidable == true || (obj as MapObjContainer).IsWeighted == true)
-                            type = "PhysicsObjContainer";
-                        else
-                            type = "ObjContainer";
-                    }
-                    else if (obj is MapSpriteObj)
-                    {
-                        if ((obj as MapSpriteObj).IsCollidable == true || (obj as MapSpriteObj).IsWeighted == true)
-                            type = "PhysicsObj";
-                        else
-                            type = "SpriteObj";
-                    }
-                    else if (obj is PlayerStartObj)
-                    {
-                        type = "PlayerStartObj";
-                        displayPlayerStartWarning = false;
                     }
 
                     writer.WriteStartElement("GameObject");
                     writer.WriteAttributeString("Type", type);
-                    if (obj is MapObjContainer)
-                        writer.WriteAttributeString("SpriteName", (obj as MapObjContainer).SpriteName);
-                    else if (obj is MapSpriteObj)
-                        writer.WriteAttributeString("SpriteName", (obj as MapSpriteObj).SpriteName);
-                    if (type == "PhysicsObjContainer" || type == "PhysicsObj")
-                    {
-                        writer.WriteAttributeString("IsCollidable", (obj as IPhysicsObj).IsCollidable.ToString());
-                        writer.WriteAttributeString("IsWeighted", (obj as IPhysicsObj).IsWeighted.ToString());
-                    }
-                    if (type == "EnemyObj")
-                    {
-                        writer.WriteAttributeString("EnemyType", (obj as EnemyMapObject).Type);
-                        writer.WriteAttributeString("Difficulty", (obj as EnemyMapObject).Difficulty.ToString());
-                        writer.WriteAttributeString("InitialDelay", (obj as EnemyMapObject).InitialLogicDelay.ToString());
-                    }
                     writer.WriteAttributeString("Name", obj.Name);
                     writer.WriteAttributeString("X", obj.X.ToString());
                     writer.WriteAttributeString("Y", obj.Y.ToString());
@@ -576,23 +533,113 @@ namespace RogueCastleEditor
                     writer.WriteAttributeString("Rotation", obj.Rotation.ToString());
                     writer.WriteAttributeString("Tag", obj.Tag);
 
+                    if (doorPos != "NULL")
+                        writer.WriteAttributeString("DoorPos", doorPos);
+
                     if (type == "CollHullObj")
                     {
-                        writer.WriteAttributeString("CollidesTop", (obj as CollHullObj).CollidesTop.ToString());
-                        writer.WriteAttributeString("CollidesBottom", (obj as CollHullObj).CollidesBottom.ToString());
-                        writer.WriteAttributeString("CollidesLeft", (obj as CollHullObj).CollidesLeft.ToString());
-                        writer.WriteAttributeString("CollidesRight", (obj as CollHullObj).CollidesRight.ToString());
+                        CollHullObj collHull = obj as CollHullObj;
+                        writer.WriteAttributeString("CollidesTop", collHull.CollidesTop.ToString());
+                        writer.WriteAttributeString("CollidesBottom", collHull.CollidesBottom.ToString());
+                        writer.WriteAttributeString("CollidesLeft", collHull.CollidesLeft.ToString());
+                        writer.WriteAttributeString("CollidesRight", collHull.CollidesRight.ToString());
                     }
-
                     writer.WriteEndElement();
                 }
-
-                if (displayPlayerStartWarning == true)
-                    OutputControl.Trace("WARNING: Saved map currently does not have a Player Start object. Map will not load correctly in-game.");
-
                 writer.WriteEndElement();
             }
-            writer.WriteEndElement();
+            
+            //bool displayPlayerStartWarning = true;
+
+            //for (int i = 0; i < this.GlobalLayerList.Count; i++)
+            //{
+            //    writer.WriteStartElement("Layer");
+            //    writer.WriteAttributeString("Name", (XAML_mapTabControl.Items[i] as TabItem).Header.ToString());
+            //    writer.WriteAttributeString("Index", i.ToString());
+               
+
+            //    foreach (GameObj obj in this.GlobalLayerList[i])
+            //    {
+            //        string type = "GameObject";
+            //        if (obj is CollHullObj)
+            //        {
+            //            type = "CollHullObj";
+            //            if ((obj as CollHullObj).IsTrigger == true)
+            //            {
+            //                if (obj.Name.ToLower().IndexOf("chest") == 0)
+            //                    type = "ChestObj";
+            //                else
+            //                    type = "TriggerObj";
+            //            }
+            //        }
+            //        else if (obj is EnemyMapObject)
+            //        {
+            //            type = "EnemyObj";
+            //        }
+            //        else if (obj is MapObjContainer)
+            //        {
+            //            if ((obj as MapObjContainer).IsCollidable == true || (obj as MapObjContainer).IsWeighted == true)
+            //                type = "PhysicsObjContainer";
+            //            else
+            //                type = "ObjContainer";
+            //        }
+            //        else if (obj is MapSpriteObj)
+            //        {
+            //            if ((obj as MapSpriteObj).IsCollidable == true || (obj as MapSpriteObj).IsWeighted == true)
+            //                type = "PhysicsObj";
+            //            else
+            //                type = "SpriteObj";
+            //        }
+            //        else if (obj is PlayerStartObj)
+            //        {
+            //            type = "PlayerStartObj";
+            //            displayPlayerStartWarning = false;
+            //        }
+
+            //        writer.WriteStartElement("GameObject");
+            //        writer.WriteAttributeString("Type", type);
+            //        if (obj is MapObjContainer)
+            //            writer.WriteAttributeString("SpriteName", (obj as MapObjContainer).SpriteName);
+            //        else if (obj is MapSpriteObj)
+            //            writer.WriteAttributeString("SpriteName", (obj as MapSpriteObj).SpriteName);
+            //        if (type == "PhysicsObjContainer" || type == "PhysicsObj")
+            //        {
+            //            writer.WriteAttributeString("IsCollidable", (obj as IPhysicsObj).IsCollidable.ToString());
+            //            writer.WriteAttributeString("IsWeighted", (obj as IPhysicsObj).IsWeighted.ToString());
+            //        }
+            //        if (type == "EnemyObj")
+            //        {
+            //            writer.WriteAttributeString("EnemyType", (obj as EnemyMapObject).Type);
+            //            writer.WriteAttributeString("Difficulty", (obj as EnemyMapObject).Difficulty.ToString());
+            //            writer.WriteAttributeString("InitialDelay", (obj as EnemyMapObject).InitialLogicDelay.ToString());
+            //        }
+            //        writer.WriteAttributeString("Name", obj.Name);
+            //        writer.WriteAttributeString("X", obj.X.ToString());
+            //        writer.WriteAttributeString("Y", obj.Y.ToString());
+            //        writer.WriteAttributeString("Width", obj.Width.ToString());
+            //        writer.WriteAttributeString("Height", obj.Height.ToString());
+            //        writer.WriteAttributeString("ScaleX", obj.ScaleX.ToString());
+            //        writer.WriteAttributeString("ScaleY", obj.ScaleY.ToString());
+            //        writer.WriteAttributeString("Rotation", obj.Rotation.ToString());
+            //        writer.WriteAttributeString("Tag", obj.Tag);
+
+            //        if (type == "CollHullObj")
+            //        {
+            //            writer.WriteAttributeString("CollidesTop", (obj as CollHullObj).CollidesTop.ToString());
+            //            writer.WriteAttributeString("CollidesBottom", (obj as CollHullObj).CollidesBottom.ToString());
+            //            writer.WriteAttributeString("CollidesLeft", (obj as CollHullObj).CollidesLeft.ToString());
+            //            writer.WriteAttributeString("CollidesRight", (obj as CollHullObj).CollidesRight.ToString());
+            //        }
+
+            //        writer.WriteEndElement();
+            //    }
+
+            //    if (displayPlayerStartWarning == true)
+            //        OutputControl.Trace("WARNING: Saved map currently does not have a Player Start object. Map will not load correctly in-game.");
+
+            //    writer.WriteEndElement();
+            //}
+            //writer.WriteEndElement();
             writer.WriteEndDocument();
 
             writer.Flush();
@@ -694,7 +741,7 @@ namespace RogueCastleEditor
             settings.IgnoreComments = true;
             settings.IgnoreWhitespace = true;
 
-            try
+            // try
             {
                 XmlReader reader = XmlReader.Create(filePath, settings);
                 int currentLayerIndex = 0;
@@ -732,6 +779,7 @@ namespace RogueCastleEditor
                                 case ("CollHullObj"):
                                     newObj = new CollHullObj(0, 0, 0, 0);
                                     break;
+                                case("DoorObj"):
                                 case ("TriggerObj"):
                                 case ("ChestObj"):
                                     newObj = new CollHullObj(0, 0, 0, 0) { IsTrigger = true };
@@ -759,7 +807,7 @@ namespace RogueCastleEditor
                                                 enemy.AdvancedScale = enemyObj.AdvancedScale;
                                                 enemy.ExpertScale = enemyObj.ExpertScale;
                                                 enemy.MinibossScale = enemyObj.MinibossScale;
-                                                switch(enemy.Difficulty)
+                                                switch (enemy.Difficulty)
                                                 {
                                                     case (EnemyDifficulty.BASIC):
                                                         enemy.TextureColor = Color.White;
@@ -783,23 +831,23 @@ namespace RogueCastleEditor
                                         }
                                     }
                                     break;
-                                case("PhysicsObjContainer"):
-                                case("ObjContainer"):
+                                case ("PhysicsObjContainer"):
+                                case ("ObjContainer"):
                                     newObj = new MapObjContainer(spriteName);
                                     if (reader.MoveToAttribute("IsCollidable"))
                                         (newObj as IPhysicsObj).IsCollidable = bool.Parse(reader.Value);
                                     if (reader.MoveToAttribute("IsWeighted"))
                                         (newObj as IPhysicsObj).IsWeighted = bool.Parse(reader.Value);
                                     break;
-                                case("PhysicsObj"):
-                                case("SpriteObj"):
+                                case ("PhysicsObj"):
+                                case ("SpriteObj"):
                                     newObj = new MapSpriteObj(spriteName);
                                     if (reader.MoveToAttribute("IsCollidable"))
                                         (newObj as IPhysicsObj).IsCollidable = bool.Parse(reader.Value);
                                     if (reader.MoveToAttribute("IsWeighted"))
                                         (newObj as IPhysicsObj).IsWeighted = bool.Parse(reader.Value);
                                     break;
-                                case("PlayerStartObj"):
+                                case ("PlayerStartObj"):
                                     newObj = new PlayerStartObj();
                                     XAML_mapDisplayXnaControl.PlayerStart = newObj as PlayerStartObj;
                                     break;
@@ -815,10 +863,6 @@ namespace RogueCastleEditor
 
                 if (XAML_mapDisplayXnaControl.PlayerStart != null)
                     XAML_mapDisplayXnaControl.Camera.Position = XAML_mapDisplayXnaControl.PlayerStart.Position;
-            }
-            catch (Exception ex)
-            {
-                OutputControl.Trace("WARNING: Could not properly parse file. Original Error:" + ex.Message);
             }
 
             XAML_mapTabControl.SelectedIndex = XAML_mapTabControl.GameLayerIndex; // Set the active layer to the game layer.

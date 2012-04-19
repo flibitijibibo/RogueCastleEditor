@@ -16,5 +16,11 @@ namespace RogueCastleEditor
         {
             m_triggerList = new List<ITriggerableObj>();
         }
+
+        public override object Clone()
+        {
+            MapTriggerObj triggerObj = new MapTriggerObj(Width, Height);
+            return triggerObj;
+        }
     }
 }

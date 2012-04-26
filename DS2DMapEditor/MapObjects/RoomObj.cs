@@ -13,6 +13,11 @@ namespace RogueCastleEditor
         MapDisplayXnaControl m_mapDisplayRef;
         MainWindow m_mainWindowRef;
 
+        public bool AddToCastlePool { get; set; }
+        public bool AddToGardenPool { get; set; }
+        public bool AddToTowerPool { get; set; }
+        public bool AddToDungeonPool { get; set; }
+
         public RoomObj(int x, int y, int width, int height, MapDisplayXnaControl mapDisplayRef, MainWindow mainWindowRef)
             : base(x, y, width, height)
         {
@@ -22,6 +27,11 @@ namespace RogueCastleEditor
             _height = height;
             m_mapDisplayRef = mapDisplayRef;
             m_mainWindowRef = mainWindowRef;
+
+            AddToCastlePool = true;
+            AddToGardenPool = true;
+            AddToTowerPool = true;
+            AddToDungeonPool = true;
         }
 
         public override void Draw(Camera2D camera)

@@ -62,22 +62,25 @@ namespace RogueCastleEditor
                 FindBox("ScaleX").IsEnabled = false;
                 FindBox("ScaleY").IsEnabled = false;
 
-                TextBlock triggerBlock = new TextBlock();
-                triggerBlock.Margin = new Thickness(0, 20, 0, 0);
-                triggerBlock.Text = "Is Trigger Object";
-                this.Children.Add(triggerBlock);
-                CheckBox newCheckBox = new CheckBox();
-                newCheckBox.Name = "TriggerCheckBox";
-                if ((m_selectedObj as CollHullObj).IsTrigger == true)
-                    newCheckBox.IsChecked = true;
-                newCheckBox.Margin = new System.Windows.Thickness(0, 5, 0, 0);
-                newCheckBox.Checked += CheckBoxEventHandler;
-                newCheckBox.Unchecked += CheckBoxEventHandler;
-                this.Children.Add(newCheckBox);
-                CreateNewCheckBox("Collides Top", "CollidesTop", (m_selectedObj as CollHullObj).CollidesTop);
-                CreateNewCheckBox("Collides Bottom", "CollidesBottom", (m_selectedObj as CollHullObj).CollidesBottom);
-                CreateNewCheckBox("Collides Left", "CollidesLeft", (m_selectedObj as CollHullObj).CollidesLeft);
-                CreateNewCheckBox("Collides Right", "CollidesRight", (m_selectedObj as CollHullObj).CollidesRight);
+                if (!(obj is RoomObj))
+                {
+                    TextBlock triggerBlock = new TextBlock();
+                    triggerBlock.Margin = new Thickness(0, 20, 0, 0);
+                    triggerBlock.Text = "Is Trigger Object";
+                    this.Children.Add(triggerBlock);
+                    CheckBox newCheckBox = new CheckBox();
+                    newCheckBox.Name = "TriggerCheckBox";
+                    if ((m_selectedObj as CollHullObj).IsTrigger == true)
+                        newCheckBox.IsChecked = true;
+                    newCheckBox.Margin = new System.Windows.Thickness(0, 5, 0, 0);
+                    newCheckBox.Checked += CheckBoxEventHandler;
+                    newCheckBox.Unchecked += CheckBoxEventHandler;
+                    this.Children.Add(newCheckBox);
+                    CreateNewCheckBox("Collides Top", "CollidesTop", (m_selectedObj as CollHullObj).CollidesTop);
+                    CreateNewCheckBox("Collides Bottom", "CollidesBottom", (m_selectedObj as CollHullObj).CollidesBottom);
+                    CreateNewCheckBox("Collides Left", "CollidesLeft", (m_selectedObj as CollHullObj).CollidesLeft);
+                    CreateNewCheckBox("Collides Right", "CollidesRight", (m_selectedObj as CollHullObj).CollidesRight);
+                }
             }
 
             if (obj is IAnimateableObj)
@@ -125,6 +128,11 @@ namespace RogueCastleEditor
 
             if (obj is IRoomPropertiesObj)
             {
+                CreateNewCheckBox("Add to Castle Pool", "CastlePool", (obj as IRoomPropertiesObj).AddToCastlePool);
+                CreateNewCheckBox("Add to Garden Pool", "GardenPool", (obj as IRoomPropertiesObj).AddToGardenPool);
+                CreateNewCheckBox("Add to Tower Pool", "TowerPool", (obj as IRoomPropertiesObj).AddToTowerPool);
+                CreateNewCheckBox("Add to Dungeon Pool", "DungeonPool", (obj as IRoomPropertiesObj).AddToDungeonPool);
+
                 TextBlock selectRoomAll = new TextBlock();
                 selectRoomAll.Margin = new Thickness(0, 20, 0, 0);
                 selectRoomAll.Text = "Select All Objects in Room";
@@ -429,6 +437,30 @@ namespace RogueCastleEditor
                         (m_selectedObj as CollHullObj).CollidesRight = true;
                     else
                         (m_selectedObj as CollHullObj).CollidesRight = false;
+                    break;
+                case("CastlePool"):
+                    if (box.IsChecked == true)
+                        (m_selectedObj as RoomObj).AddToCastlePool = true;
+                    else
+                        (m_selectedObj as RoomObj).AddToCastlePool = false;
+                    break;
+                case ("GardenPool"):
+                    if (box.IsChecked == true)
+                        (m_selectedObj as RoomObj).AddToGardenPool = true;
+                    else
+                        (m_selectedObj as RoomObj).AddToGardenPool = false;
+                    break;
+                case("TowerPool"):
+                    if (box.IsChecked == true)
+                        (m_selectedObj as RoomObj).AddToTowerPool = true;
+                    else
+                        (m_selectedObj as RoomObj).AddToTowerPool = false;
+                    break;
+                case("DungeonPool"):
+                    if (box.IsChecked == true)
+                        (m_selectedObj as RoomObj).AddToDungeonPool = true;
+                    else
+                        (m_selectedObj as RoomObj).AddToDungeonPool = false;
                     break;
             }
         }

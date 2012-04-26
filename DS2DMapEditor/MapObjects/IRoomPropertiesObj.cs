@@ -8,5 +8,9 @@ namespace RogueCastleEditor
     public interface IRoomPropertiesObj
     {
         int SelectionMode { get; set; }
+        bool AddToCastlePool { get; set; }
+        bool AddToGardenPool { get; set; }
+        bool AddToTowerPool { get; set; }
+        bool AddToDungeonPool { get; set; }
     }
 }

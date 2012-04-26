@@ -500,6 +500,11 @@ namespace RogueCastleEditor
                 writer.WriteAttributeString("ScaleY", room.ScaleY.ToString());
                 writer.WriteAttributeString("SelectionMode", room.SelectionMode.ToString());
 
+                writer.WriteAttributeString("CastlePool", room.AddToCastlePool.ToString());
+                writer.WriteAttributeString("GardenPool", room.AddToGardenPool.ToString());
+                writer.WriteAttributeString("TowerPool", room.AddToTowerPool.ToString());
+                writer.WriteAttributeString("DungeonPool", room.AddToDungeonPool.ToString());
+
                 foreach (GameObj obj in room.TouchingObjList)
                 {
                     string type = "GameObj";
@@ -548,98 +553,7 @@ namespace RogueCastleEditor
                 }
                 writer.WriteEndElement();
             }
-            
-            //bool displayPlayerStartWarning = true;
 
-            //for (int i = 0; i < this.GlobalLayerList.Count; i++)
-            //{
-            //    writer.WriteStartElement("Layer");
-            //    writer.WriteAttributeString("Name", (XAML_mapTabControl.Items[i] as TabItem).Header.ToString());
-            //    writer.WriteAttributeString("Index", i.ToString());
-               
-
-            //    foreach (GameObj obj in this.GlobalLayerList[i])
-            //    {
-            //        string type = "GameObject";
-            //        if (obj is CollHullObj)
-            //        {
-            //            type = "CollHullObj";
-            //            if ((obj as CollHullObj).IsTrigger == true)
-            //            {
-            //                if (obj.Name.ToLower().IndexOf("chest") == 0)
-            //                    type = "ChestObj";
-            //                else
-            //                    type = "TriggerObj";
-            //            }
-            //        }
-            //        else if (obj is EnemyMapObject)
-            //        {
-            //            type = "EnemyObj";
-            //        }
-            //        else if (obj is MapObjContainer)
-            //        {
-            //            if ((obj as MapObjContainer).IsCollidable == true || (obj as MapObjContainer).IsWeighted == true)
-            //                type = "PhysicsObjContainer";
-            //            else
-            //                type = "ObjContainer";
-            //        }
-            //        else if (obj is MapSpriteObj)
-            //        {
-            //            if ((obj as MapSpriteObj).IsCollidable == true || (obj as MapSpriteObj).IsWeighted == true)
-            //                type = "PhysicsObj";
-            //            else
-            //                type = "SpriteObj";
-            //        }
-            //        else if (obj is PlayerStartObj)
-            //        {
-            //            type = "PlayerStartObj";
-            //            displayPlayerStartWarning = false;
-            //        }
-
-            //        writer.WriteStartElement("GameObject");
-            //        writer.WriteAttributeString("Type", type);
-            //        if (obj is MapObjContainer)
-            //            writer.WriteAttributeString("SpriteName", (obj as MapObjContainer).SpriteName);
-            //        else if (obj is MapSpriteObj)
-            //            writer.WriteAttributeString("SpriteName", (obj as MapSpriteObj).SpriteName);
-            //        if (type == "PhysicsObjContainer" || type == "PhysicsObj")
-            //        {
-            //            writer.WriteAttributeString("IsCollidable", (obj as IPhysicsObj).IsCollidable.ToString());
-            //            writer.WriteAttributeString("IsWeighted", (obj as IPhysicsObj).IsWeighted.ToString());
-            //        }
-            //        if (type == "EnemyObj")
-            //        {
-            //            writer.WriteAttributeString("EnemyType", (obj as EnemyMapObject).Type);
-            //            writer.WriteAttributeString("Difficulty", (obj as EnemyMapObject).Difficulty.ToString());
-            //            writer.WriteAttributeString("InitialDelay", (obj as EnemyMapObject).InitialLogicDelay.ToString());
-            //        }
-            //        writer.WriteAttributeString("Name", obj.Name);
-            //        writer.WriteAttributeString("X", obj.X.ToString());
-            //        writer.WriteAttributeString("Y", obj.Y.ToString());
-            //        writer.WriteAttributeString("Width", obj.Width.ToString());
-            //        writer.WriteAttributeString("Height", obj.Height.ToString());
-            //        writer.WriteAttributeString("ScaleX", obj.ScaleX.ToString());
-            //        writer.WriteAttributeString("ScaleY", obj.ScaleY.ToString());
-            //        writer.WriteAttributeString("Rotation", obj.Rotation.ToString());
-            //        writer.WriteAttributeString("Tag", obj.Tag);
-
-            //        if (type == "CollHullObj")
-            //        {
-            //            writer.WriteAttributeString("CollidesTop", (obj as CollHullObj).CollidesTop.ToString());
-            //            writer.WriteAttributeString("CollidesBottom", (obj as CollHullObj).CollidesBottom.ToString());
-            //            writer.WriteAttributeString("CollidesLeft", (obj as CollHullObj).CollidesLeft.ToString());
-            //            writer.WriteAttributeString("CollidesRight", (obj as CollHullObj).CollidesRight.ToString());
-            //        }
-
-            //        writer.WriteEndElement();
-            //    }
-
-            //    if (displayPlayerStartWarning == true)
-            //        OutputControl.Trace("WARNING: Saved map currently does not have a Player Start object. Map will not load correctly in-game.");
-
-            //    writer.WriteEndElement();
-            //}
-            //writer.WriteEndElement();
             writer.WriteEndDocument();
 
             writer.Flush();
@@ -898,10 +812,21 @@ namespace RogueCastleEditor
                 obj.ScaleX = scaleX;
                 obj.ScaleY = scaleY;
             }
+
             if (obj is RoomObj)
             {
+                RoomObj room = obj as RoomObj;
                 if (reader.MoveToAttribute("SelectionMode"))
-                    (obj as RoomObj).SelectionMode = int.Parse(reader.Value);
+                    room.SelectionMode = int.Parse(reader.Value);
+
+                if (reader.MoveToAttribute("CastlePool"))
+                    room.AddToCastlePool = bool.Parse(reader.Value);
+                if (reader.MoveToAttribute("GardenPool"))
+                    room.AddToGardenPool = bool.Parse(reader.Value);
+                if (reader.MoveToAttribute("TowerPool"))
+                    room.AddToTowerPool = bool.Parse(reader.Value);
+                if (reader.MoveToAttribute("DungeonPool"))
+                    room.AddToDungeonPool = bool.Parse(reader.Value);
             }
             if (reader.MoveToAttribute("Rotation"))
             {

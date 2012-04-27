@@ -12,6 +12,7 @@ namespace RogueCastleEditor
         public bool LockedToLedge = false;
         public EnemyDifficulty Difficulty = EnemyDifficulty.BASIC;
         public string Type = "";
+        public bool Procedural { get; set; }
 
         public Vector2 BasicScale = new Vector2(1,1);
         public Vector2 AdvancedScale = new Vector2(1, 1);
@@ -24,6 +25,7 @@ namespace RogueCastleEditor
             : base(spriteName)
         {
             //m_type = type;
+            Procedural = true;
         }
 
         public override object Clone()
@@ -51,6 +53,8 @@ namespace RogueCastleEditor
             clonedObj.AdvancedScale = this.AdvancedScale;
             clonedObj.ExpertScale = this.ExpertScale;
             clonedObj.MinibossScale = this.MinibossScale;
+
+            clonedObj.Procedural = this.Procedural;
 
             return clonedObj;
         }

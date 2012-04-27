@@ -95,7 +95,7 @@ namespace RogueCastleEditor
             if (ChangeMade == true)
             {
                 string msg = "Unsaved changes detected.\nAre you sure you want to close the application?";
-                MessageBoxResult result = MessageBox.Show(msg, "Close DS2D Editor", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show(msg, "Close Rogue Castle Editor", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.No)
                 {
                     // If user doesn't want to close, cancel closure
@@ -337,7 +337,7 @@ namespace RogueCastleEditor
             XAML_objTreeControl.ItemsSource = XAML_objTreeControl.ObjectList;
             XAML_mapDisplayXnaControl.ObjectList = XAML_objTreeControl.ObjectList;
             ChangeMade = false;
-            ChangeTitle("DS2D Editor - New Map");
+            ChangeTitle("Rogue Castle Editor - New Map");
             UndoManager.ResetManager(); //Disabled for now because it was causing diposed objects to be disposed again.
         }
 
@@ -431,7 +431,7 @@ namespace RogueCastleEditor
                     EditorConfig.SaveDirectory = saveDialog.FileName;
                     SaveXMLFile(saveDialog.FileName);
                     SaveConfigXML();
-                    ChangeTitle("DS2D Editor - " + EditorConfig.SaveDirectory);
+                    ChangeTitle("Rogue Castle Editor - " + EditorConfig.SaveDirectory);
                     this.ChangeMade = false;
                 }
                 catch (Exception ex)
@@ -509,6 +509,8 @@ namespace RogueCastleEditor
                 {
                     string type = "GameObj";
                     string doorPos = "NULL";
+                    string spriteName = ""; // Only for storing the sprite name if the object is a sprite. This game doesn't need this value, only the editor does.
+
                     if (obj is CollHullObj)
                     {
                         type = "CollHullObj";
@@ -525,9 +527,24 @@ namespace RogueCastleEditor
                                 doorPos = "Bottom";
                         }
                     }
+                    else if (obj is EnemyMapObject)
+                    {
+                        type = "EnemyObj";
+                        spriteName = (obj as EnemyMapObject).SpriteName;
+                    }
 
                     writer.WriteStartElement("GameObject");
                     writer.WriteAttributeString("Type", type);
+                    if (spriteName != "")
+                        writer.WriteAttributeString("SpriteName", (obj as MapObjContainer).SpriteName);
+                    if (obj is EnemyMapObject)
+                    {
+                        EnemyMapObject enemy = obj as EnemyMapObject;
+                        writer.WriteAttributeString("Procedural", enemy.Procedural.ToString());
+                        writer.WriteAttributeString("EnemyType", enemy.Type);
+                        writer.WriteAttributeString("Difficulty", enemy.Difficulty.ToString());
+                        writer.WriteAttributeString("InitialDelay", enemy.InitialLogicDelay.ToString());
+                    }
                     writer.WriteAttributeString("Name", obj.Name);
                     writer.WriteAttributeString("X", obj.X.ToString());
                     writer.WriteAttributeString("Y", obj.Y.ToString());
@@ -549,6 +566,7 @@ namespace RogueCastleEditor
                         writer.WriteAttributeString("CollidesLeft", collHull.CollidesLeft.ToString());
                         writer.WriteAttributeString("CollidesRight", collHull.CollidesRight.ToString());
                     }
+                    
                     writer.WriteEndElement();
                 }
                 writer.WriteEndElement();
@@ -611,7 +629,7 @@ namespace RogueCastleEditor
                             try
                             {
                                 LoadXMLFile(openDialog.FileName);
-                                ChangeTitle("DS2D Editor - " + EditorConfig.SaveDirectory);
+                                ChangeTitle("Rogue Castle Editor - " + EditorConfig.SaveDirectory);
                                 this.ChangeMade = false;
                             }
                             catch (Exception ex)
@@ -634,7 +652,7 @@ namespace RogueCastleEditor
                         try
                         {
                             LoadXMLFile(openDialog.FileName);
-                            ChangeTitle("DS2D Editor - " + EditorConfig.SaveDirectory);
+                            ChangeTitle("Rogue Castle Editor - " + EditorConfig.SaveDirectory);
                             this.ChangeMade = false;
                         }
                         catch (Exception ex)
@@ -703,6 +721,8 @@ namespace RogueCastleEditor
                                     EnemyMapObject enemy = newObj as EnemyMapObject;
                                     if (enemy != null)
                                     {
+                                        if (reader.MoveToAttribute("Procedural"))
+                                            enemy.Procedural = bool.Parse(reader.Value);
                                         if (reader.MoveToAttribute("EnemyType"))
                                             enemy.Type = reader.Value;
                                         if (reader.MoveToAttribute("Difficulty"))

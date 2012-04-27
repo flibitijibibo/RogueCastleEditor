@@ -172,6 +172,8 @@ namespace RogueCastleEditor
 
             if (obj is EnemyMapObject)
             {
+                CreateNewCheckBox("Make Procedural", "Procedural", (obj as EnemyMapObject).Procedural);
+
                 TextBlock enemyDifficultyBasic = new TextBlock();
                 enemyDifficultyBasic.Margin = new Thickness(0, 20, 0, 0);
                 enemyDifficultyBasic.Text = "Enemy Difficulty - Basic";
@@ -461,6 +463,12 @@ namespace RogueCastleEditor
                         (m_selectedObj as RoomObj).AddToDungeonPool = true;
                     else
                         (m_selectedObj as RoomObj).AddToDungeonPool = false;
+                    break;
+                case ("Procedural"):
+                    if (box.IsChecked == true)
+                        (m_selectedObj as EnemyMapObject).Procedural = true;
+                    else
+                        (m_selectedObj as EnemyMapObject).Procedural = false;
                     break;
             }
         }

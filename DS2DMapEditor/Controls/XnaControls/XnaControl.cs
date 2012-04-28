@@ -55,7 +55,7 @@ namespace RogueCastleEditor
             services = new GameServiceContainer();
             services.AddService(typeof(IGraphicsDeviceService), GraphicsService);
             //services.AddService<IGraphicsDeviceService>(this.GraphicsService);
-            Content = new ContentManager(services, "DS2DMapEditorContent");
+            Content = new ContentManager(services, "RogueCastleEditorContent");
         }
 
         /// <summary>

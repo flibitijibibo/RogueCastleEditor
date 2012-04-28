@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DS2DMapEditorLinker")]
-[assembly: AssemblyProduct("DS2DMapEditorLinker")]
+[assembly: AssemblyTitle("RogueCastleEditorLinker")]
+[assembly: AssemblyProduct("RogueCastleEditorLinker")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("Microsoft")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2012")]

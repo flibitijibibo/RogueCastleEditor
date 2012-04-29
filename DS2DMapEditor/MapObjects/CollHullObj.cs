@@ -59,8 +59,8 @@ namespace RogueCastleEditor
             camera.Draw(Consts.GenericTexture, new Rectangle((int)(hullRect.X + rotatedPoint.X - Consts.SELECTION_BORDERWIDTH), (int)(hullRect.Y + rotatedPoint.Y), Consts.SELECTION_BORDERWIDTH, hullRect.Height), null,
                         Consts.COLLHULL_BORDER_COLOR * this.Opacity, MathHelper.ToRadians(Rotation), Vector2.Zero, SpriteEffects.None, 0);
 
-            if (IsTrigger)
-                camera.DrawString(MapDisplayXnaControl.Font, this.Name, this.Position, Color.White, MathHelper.ToRadians(Rotation), Vector2.Zero, 1 / camera.Zoom, SpriteEffects.None, 0);
+            //if (IsTrigger)
+            //    camera.DrawString(MapDisplayXnaControl.Font, this.Name, this.Position, Color.White, MathHelper.ToRadians(Rotation), Vector2.Zero, 1 / camera.Zoom, SpriteEffects.None, 0);
 
             if (CollidesTop == false)
             {

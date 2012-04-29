@@ -181,6 +181,10 @@ namespace RogueCastleEditor
             m_selectToolObj.Draw();
             //Draws a rectangle around all selected objects in this control.
             DrawSelectedObjectsRect();
+
+            foreach (RoomObj room in RoomObjectList)
+                m_camera.DrawString(MapDisplayXnaControl.Font, room.Width / Consts.ScreenWidth + "x" + room.Height / Consts.ScreenHeight, room.Position, Color.White, MathHelper.ToRadians(room.Rotation), Vector2.Zero, 1 / m_camera.Zoom, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0);
+
             DrawCameraView();
             m_camera.End();
         }

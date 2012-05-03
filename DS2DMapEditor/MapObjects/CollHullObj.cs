@@ -104,6 +104,7 @@ namespace RogueCastleEditor
             collHullToClone.CollidesRight= this.CollidesRight;
 
             collHullToClone.IsTrigger = this.IsTrigger;
+            collHullToClone.Rotation = this.Rotation;
 
             return collHullToClone;
         }

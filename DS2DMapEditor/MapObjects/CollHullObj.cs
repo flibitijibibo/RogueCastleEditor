@@ -10,6 +10,7 @@ namespace RogueCastleEditor
 {
     public class CollHullObj : GameObj, IPropertiesObj
     {
+        public bool IsChest = false;
         public bool IsTrigger = false;
         public bool CollidesTop = true;
         public bool CollidesBottom = true;
@@ -31,12 +32,16 @@ namespace RogueCastleEditor
                 this.TextureColor = Consts.COLLHULL_SELECTED_COLOR;
                 if (IsTrigger == true)
                     this.TextureColor = Consts.TRIGGEROBJ_SELECTED_COLOR;
+                else if (IsChest == true)
+                    this.TextureColor = Consts.CHESTOBJ_SELECTED_COLOR;
             }
             else
             {
                 this.TextureColor = Consts.COLLHULL_COLOR;
                 if (IsTrigger == true)
                     this.TextureColor = Consts.TRIGGEROBJ_COLOR;
+                else if (IsChest == true)
+                    this.TextureColor = Consts.CHESTOBJ_COLOR;
             }
 
             //camera.Draw(Consts.GenericTexture, this.Bounds, this.TextureColor);

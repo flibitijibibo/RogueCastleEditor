@@ -526,6 +526,8 @@ namespace RogueCastleEditor
                             else
                                 doorPos = "Bottom";
                         }
+                        else if ((obj as CollHullObj).IsChest == true)
+                            type = "ChestObj";
                     }
                     else if (obj is EnemyMapObject)
                     {
@@ -713,8 +715,10 @@ namespace RogueCastleEditor
                                     break;
                                 case("DoorObj"):
                                 case ("TriggerObj"):
-                                case ("ChestObj"):
                                     newObj = new CollHullObj(0, 0, 0, 0) { IsTrigger = true };
+                                    break;
+                                case ("ChestObj"):
+                                    newObj = new CollHullObj(0, 0, 0, 0) { IsChest = true };
                                     break;
                                 case ("EnemyObj"):
                                     newObj = new EnemyMapObject(spriteName);

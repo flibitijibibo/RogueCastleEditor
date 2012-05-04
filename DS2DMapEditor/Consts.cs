@@ -53,6 +53,8 @@ namespace RogueCastleEditor
         public static Color TRIGGEROBJ_COLOR = new Color(255, 255, 0) * 0.4f; // The colour of a collision hull when it is not selected.
         public static Color TRIGGEROBJ_SELECTED_COLOR = new Color(255, 255, 0) * 0.8f; // The colour of a collision hull when it is selected.
 
+        public static Color CHESTOBJ_COLOR = new Color(0, 255, 0) * 0.4f; // The colour of a chest obj when it is not selected.
+        public static Color CHESTOBJ_SELECTED_COLOR = new Color(0, 255, 0) * 0.8f; // The colour of a chest obj when it is selected.
 
         public static Color SELECTION_BOX = new Color(255, 255, 0); // The colour of the selection box around selected objects.
 

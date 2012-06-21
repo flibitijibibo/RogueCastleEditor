@@ -31,6 +31,7 @@ namespace RogueCastleEditor
         public override object Clone()
         {
             EnemyMapObject clonedObj = new EnemyMapObject(_spriteName);
+            clonedObj._objectList.Clear();
 
             foreach (GameObj obj in _objectList)
             {

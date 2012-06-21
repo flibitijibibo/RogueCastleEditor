@@ -44,6 +44,38 @@ namespace RogueCastleEditor
                     this.TextureColor = Consts.CHESTOBJ_COLOR;
             }
 
+            if (this.Name.Contains("Top") || this.Name.Contains("Bottom") || this.Name.Contains("Left") || this.Name.Contains("Right"))
+            {
+                if (ID == 1)
+                    this.TextureColor = Consts.COLLHULL_UNIQUE_SELECTED_COLOR;
+                else
+                    this.TextureColor = Consts.COLLHULL_UNIQUE_COLOR;
+            }
+
+            if (this.Name.Contains("!Top") || this.Name.Contains("!Bottom") || this.Name.Contains("!Left") || this.Name.Contains("!Right"))
+            {
+                if (ID == 1)
+                    this.TextureColor = Consts.COLLHULL_UNIQUE2_SELECTED_COLOR;
+                else
+                    this.TextureColor = Consts.COLLHULL_UNIQUE2_COLOR;
+            }
+
+            if (this.Name.Contains("Kill"))
+            {
+                if (ID == 1)
+                    this.TextureColor = Consts.COLLHULL_KILL_SELECTED_COLOR;
+                else
+                    this.TextureColor = Consts.COLLHULL_KILL_COLOR;
+            }
+            else if (this.Name.Contains("Damage"))
+            {
+                if (ID == 1)
+                    this.TextureColor = Consts.COLLHULL_DAMAGE_SELECTED_COLOR;
+                else
+                    this.TextureColor = Consts.COLLHULL_DAMAGE_COLOR;
+            }
+ 
+
             //camera.Draw(Consts.GenericTexture, this.Bounds, this.TextureColor);
             Rectangle hullRect = HullRect;
 
@@ -110,6 +142,7 @@ namespace RogueCastleEditor
 
             collHullToClone.IsTrigger = this.IsTrigger;
             collHullToClone.Rotation = this.Rotation;
+            collHullToClone.IsChest = this.IsChest;
 
             return collHullToClone;
         }

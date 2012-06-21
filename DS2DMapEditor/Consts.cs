@@ -38,9 +38,20 @@ namespace RogueCastleEditor
 
         //Consts for Colors
         public static Color COLLHULL_BORDER_COLOR = new Color(255, 255, 255) * 0.8f; // The colour of the borders around a collision hull.
-        public static Color COLLHULL_SELECTED_COLOR = new Color(255, 0, 0) * 0.8f; // The colour of a collision hull when it is selected.
-        public static Color COLLHULL_COLOR = new Color(255, 0, 0) * 0.4f; // The colour of a collision hull when it is not selected.
+        public static Color COLLHULL_SELECTED_COLOR = new Color(180, 0, 180); // The colour of a collision hull when it is selected.
+        public static Color COLLHULL_COLOR = new Color(180, 0, 180) * 0.4f; // The colour of a collision hull when it is not selected.
         public static Color GRID_COLOR = new Color(50, 50, 50); // The colour of the grid lines.
+
+        // Currently used for collision hulls that have the Top/!Top keyword.
+        public static Color COLLHULL_UNIQUE_COLOR = new Color(255, 255, 255) * 0.5f;
+        public static Color COLLHULL_UNIQUE_SELECTED_COLOR = new Color(255, 255, 255);
+        public static Color COLLHULL_UNIQUE2_COLOR = new Color(0, 0, 0) * 0.5f;
+        public static Color COLLHULL_UNIQUE2_SELECTED_COLOR = new Color(0, 0, 0);
+
+        public static Color COLLHULL_KILL_COLOR = new Color(255, 0, 0) * 0.6f;
+        public static Color COLLHULL_KILL_SELECTED_COLOR = new Color(255, 0, 0);
+        public static Color COLLHULL_DAMAGE_COLOR = new Color(255, 140, 0) * 0.6f;
+        public static Color COLLHULL_DAMAGE_SELECTED_COLOR = new Color(255, 140, 0);
 
         public static Color ROOM_COLOR = new Color(0, 0, 255) * 0.4f; // The colour of a room.
         public static Color ROOM_SELECTED_COLOR = new Color(0, 0, 255) * 0.8f; // The colour of a room selected.

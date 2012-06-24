@@ -35,6 +35,7 @@ namespace RogueCastleEditor
         public const int TOOLTYPE_ROOM = 5;
         public const int TOOLTYPE_PLAYER_PLACEMENT = 6;
         public const int TOOLTYPE_TRIGGER_PLACEMENT = 7;
+        public const int TOOLTYPE_ORB = 8;
 
         //Consts for Colors
         public static Color COLLHULL_BORDER_COLOR = new Color(255, 255, 255) * 0.8f; // The colour of the borders around a collision hull.

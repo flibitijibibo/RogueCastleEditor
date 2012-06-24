@@ -91,6 +91,8 @@
     <Compile Include="EditorConfig.cs" />
     <Compile Include="Controls\MapTabControl.cs" />
     <Compile Include="Controls\XnaControls\EnemyDisplayXnaControl.cs" />
+    <Compile Include="MapObjects\EnemyOrbObj.cs" />
+    <Compile Include="ToolObjects\EnemyOrbTool.cs" />
     <Compile Include="MapObjects\EnemyMapObject.cs" />
     <Compile Include="MapObjects\IRoomPropertiesObj.cs" />
     <Compile Include="MapObjects\MapObjContainer.cs" />
@@ -228,6 +230,9 @@
       <Project>{AE04DB1B-F2DD-42EC-8CB2-8A72AF4A8D7A}</Project>
       <Name>RogueCastleEditorLinker</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="OrbTool.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

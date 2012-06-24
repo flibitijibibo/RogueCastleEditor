@@ -44,6 +44,9 @@ namespace RogueCastleEditor
                     case ("TriggerTool"):
                         toolType = Consts.TOOLTYPE_TRIGGER_PLACEMENT;
                         break;
+                    case("OrbTool"):
+                        toolType = Consts.TOOLTYPE_ORB;
+                        break;
                     default:
                         break;
                 }

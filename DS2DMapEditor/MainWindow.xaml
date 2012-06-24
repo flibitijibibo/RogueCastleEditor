@@ -154,6 +154,14 @@
                         <Image Source="ResetZoomTool.jpg"/>
                     </ToggleButton.Content>
                 </ToggleButton>
+                <ToggleButton Width="25" Height="25" Margin="5,20,5,0" Click="ToolBar_Clicked" IsChecked="False" 
+                              Tag="OrbTool" Name="XAML_EnemyOrbTool"
+                              ToolTip="Enemy Orb Tool - Creates an Orb that determines the type of enemies in a room."
+                              Style="{StaticResource TabToggleButtonStyle}">
+                    <ToggleButton.Content>
+                        <Image Source="OrbTool.jpg"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
             </my:ToolbarControl>
             
             <!--   MAP TAB CONTROL  -->

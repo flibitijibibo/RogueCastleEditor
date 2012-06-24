@@ -480,6 +480,7 @@ namespace RogueCastleEditor
                     }
                 }
             }
+            /////////////////////////////////////////////////
 
             foreach (string sheetName in spritesheetList)
             {
@@ -534,6 +535,10 @@ namespace RogueCastleEditor
                         type = "EnemyObj";
                         spriteName = (obj as EnemyMapObject).SpriteName;
                     }
+                    else if (obj is EnemyOrbObj)
+                    {
+                        type = "EnemyOrbObj";
+                    }
 
                     writer.WriteStartElement("GameObject");
                     writer.WriteAttributeString("Type", type);
@@ -568,6 +573,9 @@ namespace RogueCastleEditor
                         writer.WriteAttributeString("CollidesLeft", collHull.CollidesLeft.ToString());
                         writer.WriteAttributeString("CollidesRight", collHull.CollidesRight.ToString());
                     }
+
+                    if (type == "EnemyOrbObj")
+                        writer.WriteAttributeString("OrbType", (obj as EnemyOrbObj).OrbType.ToString());
                     
                     writer.WriteEndElement();
                 }
@@ -720,6 +728,9 @@ namespace RogueCastleEditor
                                 case ("ChestObj"):
                                     newObj = new CollHullObj(0, 0, 0, 0) { IsChest = true };
                                     break;
+                                case ("EnemyOrbObj"):
+                                    newObj = new EnemyOrbObj();
+                                    break;
                                 case ("EnemyObj"):
                                     newObj = new EnemyMapObject(spriteName);
                                     EnemyMapObject enemy = newObj as EnemyMapObject;
@@ -870,6 +881,9 @@ namespace RogueCastleEditor
                 (obj as CollHullObj).CollidesLeft = bool.Parse(reader.Value);
             if (reader.MoveToAttribute("CollidesRight"))
                 (obj as CollHullObj).CollidesRight = bool.Parse(reader.Value);
+
+            if (reader.MoveToAttribute("OrbType"))
+                (obj as EnemyOrbObj).OrbType = int.Parse(reader.Value);
         }
 
         public void LoadConfigXML()

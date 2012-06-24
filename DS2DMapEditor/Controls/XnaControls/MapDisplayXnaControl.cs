@@ -541,6 +541,9 @@ namespace RogueCastleEditor
                 case (Consts.TOOLTYPE_PLAYER_PLACEMENT):
                     m_toolObject = new PlayerPlacementTool(m_camera, m_grid);
                     break;
+                case (Consts.TOOLTYPE_ORB):
+                    m_toolObject = new EnemyOrbTool(m_camera, m_grid);
+                    break;
                 default:
                     ControllerRef.ResetAllTools();
                     break;
@@ -675,12 +678,17 @@ namespace RogueCastleEditor
             else if (obj is CollHullObj)
             {
                 if (obj.Name == null)
-                    obj.Name = "Coll_Hull" + this.ObjectList.Count;
+                    obj.Name = "Coll_Hull " + this.ObjectList.Count;
             }
             else if (obj is PlayerStartObj)
             {
                 if (obj.Name == null)
                     obj.Name = "Player_Start_Obj";
+            }
+            else if (obj is EnemyOrbObj)
+            {
+                if (obj.Name == null)
+                    obj.Name = "Enemy_Orb_Obj " + this.ObjectList.Count;
             }
             else
             {

@@ -13,8 +13,9 @@ namespace RogueCastleEditor
 
         public EnemyOrbObj() : base("Orb_Sprite")
         {
-            _width = 50;
-            _height = 50;
+            //_width = 50;
+            //_height = 50;
+            this.Scale = new Vector2(3, 3);
         }
 
         public override void Draw(Camera2D camera)
@@ -24,7 +25,7 @@ namespace RogueCastleEditor
             else if (OrbType == 1)
                 TextureColor = Color.Blue;
             else if (OrbType == 2)
-                TextureColor = Color.Green;
+                TextureColor = Color.LightSeaGreen;
             else
                 TextureColor = Color.Yellow;
 

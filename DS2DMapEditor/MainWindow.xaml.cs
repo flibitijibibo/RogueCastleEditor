@@ -529,6 +529,8 @@ namespace RogueCastleEditor
                         }
                         else if ((obj as CollHullObj).IsChest == true)
                             type = "ChestObj";
+                        else if ((obj as CollHullObj).IsHazard == true)
+                            type = "HazardObj";
                     }
                     else if (obj is EnemyMapObject)
                     {
@@ -727,6 +729,9 @@ namespace RogueCastleEditor
                                     break;
                                 case ("ChestObj"):
                                     newObj = new CollHullObj(0, 0, 0, 0) { IsChest = true };
+                                    break;
+                                case ("HazardObj"):
+                                    newObj = new CollHullObj(0, 0, 0, 0) { IsHazard = true };
                                     break;
                                 case ("EnemyOrbObj"):
                                     newObj = new EnemyOrbObj();

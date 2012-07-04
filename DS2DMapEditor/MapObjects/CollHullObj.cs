@@ -12,6 +12,7 @@ namespace RogueCastleEditor
     {
         public bool IsChest = false;
         public bool IsTrigger = false;
+        public bool IsHazard = false;
         public bool CollidesTop = true;
         public bool CollidesBottom = true;
         public bool CollidesLeft = true;
@@ -60,20 +61,20 @@ namespace RogueCastleEditor
                     this.TextureColor = Consts.COLLHULL_UNIQUE2_COLOR;
             }
 
-            if (this.Name.Contains("Kill"))
+            if (IsHazard)
             {
                 if (ID == 1)
                     this.TextureColor = Consts.COLLHULL_KILL_SELECTED_COLOR;
                 else
                     this.TextureColor = Consts.COLLHULL_KILL_COLOR;
             }
-            else if (this.Name.Contains("Damage"))
-            {
-                if (ID == 1)
-                    this.TextureColor = Consts.COLLHULL_DAMAGE_SELECTED_COLOR;
-                else
-                    this.TextureColor = Consts.COLLHULL_DAMAGE_COLOR;
-            }
+            //else if (this.Name.Contains("Damage"))
+            //{
+            //    if (ID == 1)
+            //        this.TextureColor = Consts.COLLHULL_DAMAGE_SELECTED_COLOR;
+            //    else
+            //        this.TextureColor = Consts.COLLHULL_DAMAGE_COLOR;
+            //}
  
 
             //camera.Draw(Consts.GenericTexture, this.Bounds, this.TextureColor);
@@ -143,6 +144,7 @@ namespace RogueCastleEditor
             collHullToClone.IsTrigger = this.IsTrigger;
             collHullToClone.Rotation = this.Rotation;
             collHullToClone.IsChest = this.IsChest;
+            collHullToClone.IsHazard = this.IsHazard;
 
             return collHullToClone;
         }

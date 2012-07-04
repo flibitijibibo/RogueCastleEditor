@@ -67,8 +67,9 @@ namespace RogueCastleEditor
                     CollHullObj hull = obj as CollHullObj;
                     CreateNewCheckBox("Is Door Object", "TriggerCheckBox", hull.IsTrigger);
                     CreateNewCheckBox("Is Chest Object", "ChestCheckBox", hull.IsChest);
+                    CreateNewCheckBox("Is Hazard Object", "HazardCheckBox", hull.IsHazard);
 
-                    if (hull.IsTrigger == false && hull.IsChest == false)
+                    if (hull.IsTrigger == false && hull.IsChest == false && hull.IsHazard == false)
                     {
                         CreateNewCheckBox("Collides Top", "CollidesTop", hull.CollidesTop);
                         CreateNewCheckBox("Collides Bottom", "CollidesBottom", hull.CollidesBottom);
@@ -460,13 +461,13 @@ namespace RogueCastleEditor
                     {
                         (m_selectedObj as CollHullObj).IsTrigger = true;
                         (m_selectedObj as CollHullObj).IsChest = false;
+                        (m_selectedObj as CollHullObj).IsHazard = false;
                         ShowObjProperties(m_selectedObj);
                     }
                     else
                     {
                         (m_selectedObj as CollHullObj).IsTrigger = false;
-                        if ((m_selectedObj as CollHullObj).IsChest == false)
-                            ShowObjProperties(m_selectedObj);
+                        ShowObjProperties(m_selectedObj);
                     }
                     break;
                 case("ChestCheckBox"):
@@ -474,13 +475,27 @@ namespace RogueCastleEditor
                     {
                         (m_selectedObj as CollHullObj).IsChest = true;
                         (m_selectedObj as CollHullObj).IsTrigger = false;
+                        (m_selectedObj as CollHullObj).IsHazard = false;
                         ShowObjProperties(m_selectedObj);
                     }
                     else
                     {
                         (m_selectedObj as CollHullObj).IsChest = false;
-                        if ((m_selectedObj as CollHullObj).IsTrigger == false)
-                            ShowObjProperties(m_selectedObj);
+                        ShowObjProperties(m_selectedObj);
+                    }
+                    break;
+                case ("HazardCheckBox"):
+                    if (box.IsChecked == true)
+                    {
+                        (m_selectedObj as CollHullObj).IsHazard = true;
+                        (m_selectedObj as CollHullObj).IsTrigger = false;
+                        (m_selectedObj as CollHullObj).IsChest = false;
+                        ShowObjProperties(m_selectedObj);
+                    }
+                    else
+                    {
+                        (m_selectedObj as CollHullObj).IsHazard = false;
+                        ShowObjProperties(m_selectedObj);
                     }
                     break;
                 case("CollidesTop"):

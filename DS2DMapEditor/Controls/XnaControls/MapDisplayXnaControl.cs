@@ -743,19 +743,27 @@ namespace RogueCastleEditor
         public void ResetControl()
         {
             this.ClearAllSelectedObjs();
-            foreach (GameObj clipObj in m_clipboard)
-            {
-                if (!(ObjectList.Contains(clipObj)))
-                    clipObj.Dispose();
-            }
-            m_clipboard.Clear();
+            //foreach (GameObj clipObj in m_clipboard)
+            //{
+            //    if (!(ObjectList.Contains(clipObj)))
+            //        clipObj.Dispose();
+            //}
+            //m_clipboard.Clear();
+
             foreach (RoomObj roomObj in RoomObjectList)
-                roomObj.Dispose();
+            {
+                if (!(m_clipboard.Contains(roomObj))) // only room the rooms not found in the clipboard.
+                    roomObj.Dispose();
+            }
             RoomObjectList.Clear();
+
             for (int i = 0; i < ControllerRef.GlobalLayerList.Count; i++)
             {
                 foreach (GameObj obj in ControllerRef.GlobalLayerList[i])
-                    obj.Dispose();
+                {
+                    if (!(m_clipboard.Contains(obj))) // only remove game objs not found in the clipboard.
+                        obj.Dispose();
+                }
 
                 ControllerRef.GlobalLayerList[i].Clear();
             }

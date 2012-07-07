@@ -249,6 +249,10 @@
                     <MenuItem Name="XAML_snapGridMenuItem" Header="S_nap to Grid" IsCheckable="True" IsChecked="True" Click="SnapGrid_Clicked" />
                     <MenuItem Name="XAML_gridPropertiesMenuItem" Header="Grid _Properties" />
                 </MenuItem>
+                <MenuItem Header="_Selection Tool">
+                    <MenuItem Name="XAML_selectCollHullsItem" Header="Select _Collision Hulls" IsCheckable="True" IsChecked="True" Click="SelectCollHulls_Clicked" />
+                    <MenuItem Name="XAML_selectSpriteObjsItem" Header="Select _Sprites" IsCheckable="True" IsChecked="True" Click="SelectSprites_Clicked" />
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="_Layers" />
             <MenuItem Header="_Project">

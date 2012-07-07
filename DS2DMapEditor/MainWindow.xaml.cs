@@ -196,6 +196,17 @@ namespace RogueCastleEditor
         {
             XAML_mapDisplayXnaControl.SnapToGrid = XAML_snapGridMenuItem.IsChecked;
         }
+
+        private void SelectCollHulls_Clicked(object sender, RoutedEventArgs e)
+        {
+            XAML_mapDisplayXnaControl.SelectCollHulls = XAML_selectCollHullsItem.IsChecked;
+        }
+
+        private void SelectSprites_Clicked(object sender, RoutedEventArgs e)
+        {
+            XAML_mapDisplayXnaControl.SelectSpriteObjs = XAML_selectSpriteObjsItem.IsChecked;
+        }
+       
        
         private void Directories_Clicked(object sender, RoutedEventArgs e)
         {
@@ -541,6 +552,10 @@ namespace RogueCastleEditor
                     {
                         type = "EnemyOrbObj";
                     }
+                    else if (obj is MapSpriteObj)
+                    {
+                        type = "SpriteObj";
+                    }
 
                     writer.WriteStartElement("GameObject");
                     writer.WriteAttributeString("Type", type);
@@ -578,6 +593,9 @@ namespace RogueCastleEditor
 
                     if (type == "EnemyOrbObj")
                         writer.WriteAttributeString("OrbType", (obj as EnemyOrbObj).OrbType.ToString());
+
+                    if (type == "SpriteObj")
+                        writer.WriteAttributeString("SpriteName", (obj as MapSpriteObj).SpriteName);
                     
                     writer.WriteEndElement();
                 }

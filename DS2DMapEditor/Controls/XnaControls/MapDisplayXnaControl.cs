@@ -51,6 +51,10 @@ namespace RogueCastleEditor
         public bool GridVisible { get; set; }
         public PlayerStartObj PlayerStart { get; set; }
 
+        // Selection tool properties.
+        public bool SelectCollHulls { get; set; }
+        public bool SelectSpriteObjs { get; set; }
+
         public static SpriteFont Font;
 
         public MapDisplayXnaControl()
@@ -66,6 +70,8 @@ namespace RogueCastleEditor
 
             RoomObjectList = new ObservableCollection<GameObj>();
             m_objStartPos = new List<Vector2>();
+            SelectCollHulls = true;
+            SelectSpriteObjs = true;
         }
 
         /// <summary>

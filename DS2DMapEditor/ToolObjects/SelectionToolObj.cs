@@ -49,14 +49,22 @@ namespace RogueCastleEditor
                 {
                     Vector2 anchorPt = new Vector2(obj.Bounds.Width * 0.5f, obj.Bounds.Height * 0.5f);
                     Rectangle objRect = obj.Bounds;
+                    bool selectObject = false;
+
                     if (obj is CollHullObj)
                     {
                         anchorPt = Vector2.Zero;
                         objRect = (obj as CollHullObj).HullRect;
+                        if (ControllerRef.SelectCollHulls == true)
+                            selectObject = true;
                     }
+
+                    if (obj is MapSpriteObj && ControllerRef.SelectSpriteObjs == true)
+                        selectObject = true;
+
                     //if (CollisionMath.Intersects(obj.Bounds, new Rectangle((int)((e.Position.X * 1 / m_camera.Zoom) + m_camera.TopLeftCorner.X), (int)((e.Position.Y * 1 / m_camera.Zoom) + m_camera.TopLeftCorner.Y), 1, 1)))
                     if (CollisionMath.RotatedRectIntersects(objRect, obj.Rotation, anchorPt, 
-                        new Rectangle((int)((e.Position.X * 1 / m_camera.Zoom) + m_camera.TopLeftCorner.X), (int)((e.Position.Y * 1 / m_camera.Zoom) + m_camera.TopLeftCorner.Y), 10, 10), 0, new Vector2(5,5)))
+                        new Rectangle((int)((e.Position.X * 1 / m_camera.Zoom) + m_camera.TopLeftCorner.X), (int)((e.Position.Y * 1 / m_camera.Zoom) + m_camera.TopLeftCorner.Y), 10, 10), 0, new Vector2(5,5)) && selectObject == true)
                     {
                         if (!ControllerRef.SelectedObjects.Contains(obj))
                         {

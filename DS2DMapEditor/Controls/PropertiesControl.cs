@@ -164,6 +164,8 @@ namespace RogueCastleEditor
                 rad1.Checked += RadioButtonEventHandler;
                 rad2.Checked += RadioButtonEventHandler;
                 rad3.Checked += RadioButtonEventHandler;
+
+                CreateNewCheckBox("Display Background", "DisplayBG", (obj as IRoomPropertiesObj).DisplayBG);
             }
 
             if (obj is EnemyMapObject)
@@ -551,6 +553,12 @@ namespace RogueCastleEditor
                         (m_selectedObj as EnemyMapObject).Procedural = true;
                     else
                         (m_selectedObj as EnemyMapObject).Procedural = false;
+                    break;
+                case("DisplayBG"):
+                    if (box.IsChecked == true)
+                        (m_selectedObj as RoomObj).DisplayBG = true;
+                    else
+                        (m_selectedObj as RoomObj).DisplayBG = false;
                     break;
             }
         }

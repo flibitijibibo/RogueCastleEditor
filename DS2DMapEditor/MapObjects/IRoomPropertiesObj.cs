@@ -12,5 +12,6 @@ namespace RogueCastleEditor
         bool AddToGardenPool { get; set; }
         bool AddToTowerPool { get; set; }
         bool AddToDungeonPool { get; set; }
+        bool DisplayBG { get; set; }
     }
 }

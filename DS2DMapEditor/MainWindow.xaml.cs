@@ -511,6 +511,7 @@ namespace RogueCastleEditor
                 writer.WriteAttributeString("ScaleX", room.ScaleX.ToString());
                 writer.WriteAttributeString("ScaleY", room.ScaleY.ToString());
                 writer.WriteAttributeString("SelectionMode", room.SelectionMode.ToString());
+                writer.WriteAttributeString("DisplayBG", room.DisplayBG.ToString());
 
                 writer.WriteAttributeString("CastlePool", room.AddToCastlePool.ToString());
                 writer.WriteAttributeString("GardenPool", room.AddToGardenPool.ToString());
@@ -885,6 +886,8 @@ namespace RogueCastleEditor
                     room.AddToTowerPool = bool.Parse(reader.Value);
                 if (reader.MoveToAttribute("DungeonPool"))
                     room.AddToDungeonPool = bool.Parse(reader.Value);
+                if (reader.MoveToAttribute("DisplayBG"))
+                    room.DisplayBG = bool.Parse(reader.Value);
             }
             if (reader.MoveToAttribute("Rotation"))
             {

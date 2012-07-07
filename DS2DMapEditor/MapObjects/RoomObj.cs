@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using SpriteSystem;
 
 namespace RogueCastleEditor
 {
@@ -12,11 +14,13 @@ namespace RogueCastleEditor
         public int SelectionMode { get; set; }
         MapDisplayXnaControl m_mapDisplayRef;
         MainWindow m_mainWindowRef;
+        private RenderTarget2D m_backgroundTexture;
 
         public bool AddToCastlePool { get; set; }
         public bool AddToGardenPool { get; set; }
         public bool AddToTowerPool { get; set; }
         public bool AddToDungeonPool { get; set; }
+        public bool DisplayBG { get; set; }
 
         public RoomObj(int x, int y, int width, int height, MapDisplayXnaControl mapDisplayRef, MainWindow mainWindowRef)
             : base(x, y, width, height)
@@ -32,16 +36,42 @@ namespace RogueCastleEditor
             AddToGardenPool = true;
             AddToTowerPool = true;
             AddToDungeonPool = true;
+            DisplayBG = false;
+            Camera2D cam = mapDisplayRef.Camera;
+
+            // Creating a background texture that is a power of 2. Otherwise SamplerState.LinearWrap will not work in the draw call.
+            SpriteObj background = new SpriteObj("CastleBG1_Sprite");
+            background.Scale = new Vector2(512 / background.Width, 512 / background.Height);
+            m_backgroundTexture = new RenderTarget2D(cam.GraphicsDevice, 512, 512);
+            cam.GraphicsDevice.SetRenderTarget(m_backgroundTexture);
+            cam.Begin();
+            background.Draw(cam);
+            cam.End();
+            cam.GraphicsDevice.SetRenderTarget(null);
         }
 
         public override void Draw(Camera2D camera)
         {
+            float bgOpacity = 1;
+
             if (ID == 1)
                 this.TextureColor = Consts.ROOM_SELECTED_COLOR;
             else
+            {
+                bgOpacity = 0.5f;
                 this.TextureColor = Consts.ROOM_COLOR;
+            }
 
-            camera.Draw(Consts.GenericTexture, this.Bounds, TextureColor);
+            if (DisplayBG == false)
+                camera.Draw(Consts.GenericTexture, this.Bounds, TextureColor);
+            else
+            {
+                camera.End();
+                camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, null, null, null, camera.GetTransformation());
+                camera.Draw(m_backgroundTexture, this.Position, new Rectangle(0, 0, this.Width, this.Height), Color.White * bgOpacity, 0, Vector2.Zero, this.Scale, SpriteEffects.None, 0);
+                camera.End();
+                camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.GetTransformation());
+            }
 
             // Top Border
             camera.Draw(Consts.GenericTexture, new Rectangle(this.Bounds.X, this.Bounds.Y, this.Bounds.Width, Consts.SELECTION_BORDERWIDTH),
@@ -117,9 +147,14 @@ namespace RogueCastleEditor
 
         public override void Dispose()
         {
-            m_mainWindowRef = null;
-            m_mapDisplayRef = null;
-            base.Dispose();
+            if (IsDisposed == false)
+            {
+                m_mainWindowRef = null;
+                m_mapDisplayRef = null;
+                m_backgroundTexture.Dispose();
+                m_backgroundTexture = null;
+                base.Dispose();
+            }
         }
     }
 }

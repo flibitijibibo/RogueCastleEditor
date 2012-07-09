@@ -543,6 +543,8 @@ namespace RogueCastleEditor
                             type = "ChestObj";
                         else if ((obj as CollHullObj).IsHazard == true)
                             type = "HazardObj";
+                        else if ((obj as CollHullObj).IsBorder == true)
+                            type = "BorderObj";
                     }
                     else if (obj is EnemyMapObject)
                     {
@@ -583,7 +585,7 @@ namespace RogueCastleEditor
                     if (doorPos != "NULL")
                         writer.WriteAttributeString("DoorPos", doorPos);
 
-                    if (type == "CollHullObj")
+                    if (type == "CollHullObj" || type == "BorderObj")
                     {
                         CollHullObj collHull = obj as CollHullObj;
                         writer.WriteAttributeString("CollidesTop", collHull.CollidesTop.ToString());
@@ -751,6 +753,9 @@ namespace RogueCastleEditor
                                     break;
                                 case ("HazardObj"):
                                     newObj = new CollHullObj(0, 0, 0, 0) { IsHazard = true };
+                                    break;
+                                case ("BorderObj"):
+                                    newObj = new CollHullObj(0, 0, 0, 0) { IsBorder = true };
                                     break;
                                 case ("EnemyOrbObj"):
                                     newObj = new EnemyOrbObj();

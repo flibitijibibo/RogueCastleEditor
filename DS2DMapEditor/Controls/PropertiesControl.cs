@@ -68,6 +68,7 @@ namespace RogueCastleEditor
                     CreateNewCheckBox("Is Door Object", "TriggerCheckBox", hull.IsTrigger);
                     CreateNewCheckBox("Is Chest Object", "ChestCheckBox", hull.IsChest);
                     CreateNewCheckBox("Is Hazard Object", "HazardCheckBox", hull.IsHazard);
+                    CreateNewCheckBox("Is Border Object", "BorderCheckBox", hull.IsBorder);
 
                     if (hull.IsTrigger == false && hull.IsChest == false && hull.IsHazard == false)
                     {
@@ -464,6 +465,7 @@ namespace RogueCastleEditor
                         (m_selectedObj as CollHullObj).IsTrigger = true;
                         (m_selectedObj as CollHullObj).IsChest = false;
                         (m_selectedObj as CollHullObj).IsHazard = false;
+                        (m_selectedObj as CollHullObj).IsBorder = false;
                         ShowObjProperties(m_selectedObj);
                     }
                     else
@@ -478,6 +480,7 @@ namespace RogueCastleEditor
                         (m_selectedObj as CollHullObj).IsChest = true;
                         (m_selectedObj as CollHullObj).IsTrigger = false;
                         (m_selectedObj as CollHullObj).IsHazard = false;
+                        (m_selectedObj as CollHullObj).IsBorder = false;
                         ShowObjProperties(m_selectedObj);
                     }
                     else
@@ -492,11 +495,27 @@ namespace RogueCastleEditor
                         (m_selectedObj as CollHullObj).IsHazard = true;
                         (m_selectedObj as CollHullObj).IsTrigger = false;
                         (m_selectedObj as CollHullObj).IsChest = false;
+                        (m_selectedObj as CollHullObj).IsBorder = false;
                         ShowObjProperties(m_selectedObj);
                     }
                     else
                     {
                         (m_selectedObj as CollHullObj).IsHazard = false;
+                        ShowObjProperties(m_selectedObj);
+                    }
+                    break;
+                case ("BorderCheckBox"):
+                    if (box.IsChecked == true)
+                    {
+                        (m_selectedObj as CollHullObj).IsHazard = false;
+                        (m_selectedObj as CollHullObj).IsTrigger = false;
+                        (m_selectedObj as CollHullObj).IsChest = false;
+                        (m_selectedObj as CollHullObj).IsBorder = true;
+                        ShowObjProperties(m_selectedObj);
+                    }
+                    else
+                    {
+                        (m_selectedObj as CollHullObj).IsBorder = false;
                         ShowObjProperties(m_selectedObj);
                     }
                     break;

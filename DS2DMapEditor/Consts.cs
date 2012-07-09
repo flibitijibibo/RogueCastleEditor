@@ -53,6 +53,9 @@ namespace RogueCastleEditor
         public static Color COLLHULL_KILL_SELECTED_COLOR = new Color(255, 0, 0);
         public static Color COLLHULL_DAMAGE_COLOR = new Color(255, 140, 0) * 0.6f;
         public static Color COLLHULL_DAMAGE_SELECTED_COLOR = new Color(255, 140, 0);
+        public static Color COLLHULL_BORDEROBJ_COLOR = new Color(80, 80, 80) * 0.6f;
+        public static Color COLLHULL_BORDEROBJ_SELECTED_COLOR = new Color(80, 80, 80);
+
 
         public static Color ROOM_COLOR = new Color(0, 0, 255) * 0.4f; // The colour of a room.
         public static Color ROOM_SELECTED_COLOR = new Color(0, 0, 255) * 0.8f; // The colour of a room selected.

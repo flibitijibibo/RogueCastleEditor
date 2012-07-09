@@ -62,6 +62,9 @@ namespace RogueCastleEditor
                     if (obj is MapSpriteObj && ControllerRef.SelectSpriteObjs == true)
                         selectObject = true;
 
+                    if (obj is EnemyMapObject)
+                        selectObject = true;
+
                     //if (CollisionMath.Intersects(obj.Bounds, new Rectangle((int)((e.Position.X * 1 / m_camera.Zoom) + m_camera.TopLeftCorner.X), (int)((e.Position.Y * 1 / m_camera.Zoom) + m_camera.TopLeftCorner.Y), 1, 1)))
                     if (CollisionMath.RotatedRectIntersects(objRect, obj.Rotation, anchorPt, 
                         new Rectangle((int)((e.Position.X * 1 / m_camera.Zoom) + m_camera.TopLeftCorner.X), (int)((e.Position.Y * 1 / m_camera.Zoom) + m_camera.TopLeftCorner.Y), 10, 10), 0, new Vector2(5,5)) && selectObject == true)

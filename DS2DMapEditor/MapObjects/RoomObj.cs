@@ -101,15 +101,21 @@ namespace RogueCastleEditor
                             // Used so that objects touching the room that are rotated are also registered as touching.
                             if (obj != this && (!(obj is RoomObj)))
                             {
-                                if (CollisionMath.RotatedRectIntersects(this.Bounds, 0, Vector2.Zero, obj.Bounds, obj.Rotation, new Vector2(obj.Bounds.Width * 0.5f, obj.Bounds.Height * 0.5f)))
-                                {
+                                Vector2 rotationAnchorPt = new Vector2(obj.Width * 0.5f, obj.Height * 0.5f);
+                                if (obj is CollHullObj)
+                                    rotationAnchorPt = Vector2.Zero;
+
+                                if (CollisionMath.RotatedRectIntersects(this.Bounds, 0, Vector2.Zero, new Rectangle((int)obj.X, (int)obj.Y, obj.Width, obj.Height), obj.Rotation, rotationAnchorPt))
                                     objListToReturn.Add(obj);
-                                }
-                                else
-                                {
-                                    if (CollisionMath.Intersects(this.Bounds, obj.Bounds))
-                                      objListToReturn.Add(obj);
-                                }
+                                //if (CollisionMath.RotatedRectIntersects(this.Bounds, 0, Vector2.Zero, obj.Bounds, obj.Rotation, new Vector2(obj.Bounds.Width * 0.5f, obj.Bounds.Height * 0.5f)))
+                                //{
+                                //    objListToReturn.Add(obj);
+                                //}
+                                //else // Why is this here?
+                                //{
+                                //    if (CollisionMath.Intersects(this.Bounds, obj.Bounds))
+                                //        objListToReturn.Add(obj);
+                                //}
                             }
                         }
                     }
@@ -120,15 +126,22 @@ namespace RogueCastleEditor
                     {
                         if (obj != this && (!(obj is RoomObj)))
                         {
-                            if (CollisionMath.RotatedRectIntersects(this.Bounds, 0, Vector2.Zero, obj.Bounds, obj.Rotation, new Vector2(obj.Bounds.Width * 0.5f, obj.Bounds.Height * 0.5f)))
-                            {
+
+                            Vector2 rotationAnchorPt = new Vector2(obj.Width * 0.5f, obj.Height * 0.5f);
+                            if (obj is CollHullObj)
+                                rotationAnchorPt = Vector2.Zero;
+
+                            if (CollisionMath.RotatedRectIntersects(this.Bounds, 0, Vector2.Zero, new Rectangle((int)obj.X, (int)obj.Y, obj.Width, obj.Height), obj.Rotation, rotationAnchorPt))
                                 objListToReturn.Add(obj);
-                            }
-                            else
-                            {
-                                if (CollisionMath.Intersects(this.Bounds, obj.Bounds))
-                                    objListToReturn.Add(obj);
-                            }
+                            //if (CollisionMath.RotatedRectIntersects(this.Bounds, 0, Vector2.Zero, obj.Bounds, obj.Rotation, new Vector2(obj.Bounds.Width * 0.5f, obj.Bounds.Height * 0.5f)))
+                            //{
+                            //    objListToReturn.Add(obj);
+                            //}
+                            //else
+                            //{
+                            //    if (CollisionMath.Intersects(this.Bounds, obj.Bounds))
+                            //        objListToReturn.Add(obj);
+                            //}
                         }
                     }
                 }

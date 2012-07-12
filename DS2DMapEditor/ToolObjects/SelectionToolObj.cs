@@ -65,6 +65,9 @@ namespace RogueCastleEditor
                     if (obj is EnemyMapObject)
                         selectObject = true;
 
+                    if (obj is EnemyOrbObj)
+                        selectObject = true;
+
                     //if (CollisionMath.Intersects(obj.Bounds, new Rectangle((int)((e.Position.X * 1 / m_camera.Zoom) + m_camera.TopLeftCorner.X), (int)((e.Position.Y * 1 / m_camera.Zoom) + m_camera.TopLeftCorner.Y), 1, 1)))
                     if (CollisionMath.RotatedRectIntersects(objRect, obj.Rotation, anchorPt, 
                         new Rectangle((int)((e.Position.X * 1 / m_camera.Zoom) + m_camera.TopLeftCorner.X), (int)((e.Position.Y * 1 / m_camera.Zoom) + m_camera.TopLeftCorner.Y), 10, 10), 0, new Vector2(5,5)) && selectObject == true)
@@ -341,9 +344,10 @@ namespace RogueCastleEditor
             List<GameObj> objsToAdd = new List<GameObj>();
             foreach (GameObj obj in ControllerRef.SelectedObjects)
             {
-                if (obj is RoomObj && (obj as RoomObj).SelectionMode != 2)
+                RoomObj selectedRoom = obj as RoomObj;
+                if (selectedRoom != null && selectedRoom.SelectionMode != 2)
                 {
-                    foreach (GameObj touchingObj in (obj as RoomObj).TouchingObjList)
+                    foreach (GameObj touchingObj in selectedRoom.TouchingObjList)
                     {
                         if (!(ControllerRef.SelectedObjects.Contains(touchingObj)))
                             objsToAdd.Add(touchingObj);

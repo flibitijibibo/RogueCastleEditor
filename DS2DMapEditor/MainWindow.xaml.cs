@@ -530,14 +530,20 @@ namespace RogueCastleEditor
                         if ((obj as CollHullObj).IsTrigger == true)
                         {
                             type = "DoorObj";
-                            if (obj.X == room.X)
-                                doorPos = "Left";
-                            else if (obj.Y == room.Y)
-                                doorPos = "Top";
-                            else if ((obj.X + obj.Width) == (room.X + room.Width))
-                                doorPos = "Right";
+
+                            if ((obj as CollHullObj).IsBossDoor == false)
+                            {
+                                if (obj.X == room.X)
+                                    doorPos = "Left";
+                                else if (obj.Y == room.Y)
+                                    doorPos = "Top";
+                                else if ((obj.X + obj.Width) == (room.X + room.Width))
+                                    doorPos = "Right";
+                                else
+                                    doorPos = "Bottom";
+                            }
                             else
-                                doorPos = "Bottom";
+                                doorPos = "None";
                         }
                         else if ((obj as CollHullObj).IsChest == true)
                             type = "ChestObj";
@@ -582,8 +588,11 @@ namespace RogueCastleEditor
                     writer.WriteAttributeString("Rotation", obj.Rotation.ToString());
                     writer.WriteAttributeString("Tag", obj.Tag);
 
-                    if (doorPos != "NULL")
+                    if (type == "DoorObj")
+                    {
                         writer.WriteAttributeString("DoorPos", doorPos);
+                        writer.WriteAttributeString("BossDoor", (obj as CollHullObj).IsBossDoor.ToString());
+                    }
 
                     if (type == "CollHullObj" || type == "BorderObj")
                     {
@@ -747,6 +756,8 @@ namespace RogueCastleEditor
                                 case("DoorObj"):
                                 case ("TriggerObj"):
                                     newObj = new CollHullObj(0, 0, 0, 0) { IsTrigger = true };
+                                    if (reader.MoveToAttribute("BossDoor"))
+                                        (newObj as CollHullObj).IsBossDoor = bool.Parse(reader.Value);
                                     break;
                                 case ("ChestObj"):
                                     newObj = new CollHullObj(0, 0, 0, 0) { IsChest = true };

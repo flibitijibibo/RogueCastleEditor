@@ -72,11 +72,14 @@ namespace RogueCastleEditor
 
                     if (hull.IsTrigger == false && hull.IsChest == false && hull.IsHazard == false)
                     {
-                        CreateNewCheckBox("Collides Top", "CollidesTop", hull.CollidesTop);
+                        CreateNewCheckBox("Collides Top", "CollidesTop", hull.CollidesTop, 20);
                         CreateNewCheckBox("Collides Bottom", "CollidesBottom", hull.CollidesBottom);
                         CreateNewCheckBox("Collides Left", "CollidesLeft", hull.CollidesLeft);
                         CreateNewCheckBox("Collides Right", "CollidesRight", hull.CollidesRight);
                     }
+
+                    if (hull.IsTrigger == true)
+                        CreateNewCheckBox("Is Boss Door", "BossDoor", hull.IsBossDoor, 20);
                 }
             }
 
@@ -289,10 +292,10 @@ namespace RogueCastleEditor
             return newBox;
         }
 
-        private CheckBox CreateNewCheckBox(string boxName, string boxTag, bool isChecked)
+        private CheckBox CreateNewCheckBox(string boxName, string boxTag, bool isChecked, int margin = 5)
         {
             TextBlock newBlock = new TextBlock();
-            newBlock.Margin = new Thickness(0, 5, 0, 0);
+            newBlock.Margin = new Thickness(0, margin, 0, 0);
             newBlock.Text = boxName;
             this.Children.Add(newBlock);
 
@@ -518,6 +521,12 @@ namespace RogueCastleEditor
                         (m_selectedObj as CollHullObj).IsBorder = false;
                         ShowObjProperties(m_selectedObj);
                     }
+                    break;
+                case("BossDoor"):
+                    if (box.IsChecked == true)
+                        (m_selectedObj as CollHullObj).IsBossDoor = true;
+                    else
+                        (m_selectedObj as CollHullObj).IsBossDoor = false;
                     break;
                 case("CollidesTop"):
                     if (box.IsChecked == true)

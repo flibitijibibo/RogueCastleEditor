@@ -14,6 +14,7 @@ namespace RogueCastleEditor
         public bool IsTrigger = false;
         public bool IsHazard = false;
         public bool IsBorder = false;
+        public bool IsBossDoor = false;
         public bool CollidesTop = true;
         public bool CollidesBottom = true;
         public bool CollidesLeft = true;
@@ -156,6 +157,8 @@ namespace RogueCastleEditor
             collHullToClone.IsChest = this.IsChest;
             collHullToClone.IsHazard = this.IsHazard;
             collHullToClone.IsBorder = this.IsBorder;
+
+            collHullToClone.IsBossDoor = this.IsBossDoor;
 
             return collHullToClone;
         }

@@ -59,7 +59,7 @@ namespace RogueCastleEditor
                             selectObject = true;
                     }
 
-                    if (obj is MapSpriteObj && ControllerRef.SelectSpriteObjs == true)
+                    if ((obj is MapSpriteObj ||obj is MapObjContainer) && ControllerRef.SelectSpriteObjs == true)
                         selectObject = true;
 
                     if (obj is EnemyMapObject)

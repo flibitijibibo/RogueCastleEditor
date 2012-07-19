@@ -92,9 +92,16 @@ namespace RogueCastleEditor
                                 m_scaleHeight = m_scaleWidth;
                         }
 
-                        (ControllerRef.SelectedObjects[i] as CollHullObj).Width = (int)m_objStartScale[i].X + m_scaleWidth;
-                        (ControllerRef.SelectedObjects[i] as CollHullObj).Height = (int)m_objStartScale[i].Y + m_scaleHeight;
+                        int newWidth = (int)m_objStartScale[i].X + m_scaleWidth;
+                        int newHeight = (int)m_objStartScale[i].Y + m_scaleHeight;
 
+                        if (newWidth > 10)
+                            (ControllerRef.SelectedObjects[i] as CollHullObj).Width = (int)m_objStartScale[i].X + m_scaleWidth;
+                        if (newHeight > 10)
+                            (ControllerRef.SelectedObjects[i] as CollHullObj).Height = (int)m_objStartScale[i].Y + m_scaleHeight;
+
+                        //(ControllerRef.SelectedObjects[i] as CollHullObj).Width = (int)m_objStartScale[i].X + m_scaleWidth;
+                        //(ControllerRef.SelectedObjects[i] as CollHullObj).Height = (int)m_objStartScale[i].Y + m_scaleHeight;
                     }
                     else
                     {

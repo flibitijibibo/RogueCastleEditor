@@ -55,11 +55,19 @@ namespace RogueCastleEditor
             float bgOpacity = 1;
 
             if (ID == 1)
-                this.TextureColor = Consts.ROOM_SELECTED_COLOR;
+            {
+                if (this.X >= 10000)
+                    this.TextureColor = Consts.ROOM_OUTOFBOUNDS_COLOR_SELECTED;
+                else
+                    this.TextureColor = Consts.ROOM_SELECTED_COLOR;
+            }
             else
             {
                 bgOpacity = 0.5f;
-                this.TextureColor = Consts.ROOM_COLOR;
+                if (this.X >= 10000)
+                    this.TextureColor = Consts.ROOM_OUTOFBOUNDS_COLOR;
+                else
+                    this.TextureColor = Consts.ROOM_COLOR;
             }
 
             if (DisplayBG == false)

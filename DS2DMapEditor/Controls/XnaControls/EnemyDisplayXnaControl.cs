@@ -146,11 +146,12 @@ namespace RogueCastleEditor
                 if (CollisionMath.Intersects(obj.Bounds, new Rectangle((int)(e.Position.X + m_camera.TopLeftCorner.X),
                                                                         (int)(e.Position.Y + m_camera.TopLeftCorner.Y), 1, 1)))
                 {
+                    Vector2 storedScale = obj.Scale;
+                    obj.Scale = new Vector2(1,1);
                     EnemyMapObject objToClone = obj.Clone() as EnemyMapObject;
-                    //objToClone.ScaleX = 1;
-                    //objToClone.ScaleY = 1;
-                    objToClone.Scale = objToClone.BasicScale;
+                    //objToClone.Scale = objToClone.BasicScale;
                     ControllerRef.AddSprite(objToClone);
+                    obj.Scale = storedScale;
                 }
             }
         }

@@ -577,6 +577,7 @@ namespace RogueCastleEditor
                         writer.WriteAttributeString("EnemyType", enemy.Type);
                         writer.WriteAttributeString("Difficulty", enemy.Difficulty.ToString());
                         writer.WriteAttributeString("InitialDelay", enemy.InitialLogicDelay.ToString());
+                        writer.WriteAttributeString("Flip", (enemy.Flip == SpriteEffects.FlipHorizontally).ToString());
                     }
                     writer.WriteAttributeString("Name", obj.Name);
                     writer.WriteAttributeString("X", obj.X.ToString());
@@ -817,6 +818,11 @@ namespace RogueCastleEditor
                                                 }
                                                 break;
                                             }
+                                        }
+                                        if (reader.MoveToAttribute("Flip"))
+                                        {
+                                            if (bool.Parse(reader.Value) == true)
+                                                enemy.Flip = SpriteEffects.FlipHorizontally;
                                         }
                                     }
                                     break;

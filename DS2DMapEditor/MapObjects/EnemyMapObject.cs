@@ -25,7 +25,7 @@ namespace RogueCastleEditor
             : base(spriteName)
         {
             //m_type = type;
-            Procedural = true;
+            Procedural = false;
         }
 
         public override object Clone()

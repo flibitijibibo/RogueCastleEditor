@@ -60,6 +60,8 @@ namespace RogueCastleEditor
         public static Color ROOM_COLOR = new Color(0, 0, 255) * 0.4f; // The colour of a room.
         public static Color ROOM_SELECTED_COLOR = new Color(0, 0, 255) * 0.8f; // The colour of a room selected.
         public static Color ROOM_BORDER_COLOR = new Color(255, 255, 255) * 0.8f; // The colour of the border around a room.
+        public static Color ROOM_OUTOFBOUNDS_COLOR = new Color(255, 200, 0) * 0.4f;
+        public static Color ROOM_OUTOFBOUNDS_COLOR_SELECTED = new Color(255, 200, 0) * 0.8f; 
 
         public static Color PLAYER_START_COLOR = new Color(255, 150, 0) * 0.4f; // The colour of the player's starting position.
         public static Color PLAYER_START_SELECTED_COLOR = new Color(255, 150, 0) * 0.8f; // The colour of the player's starting position selected.

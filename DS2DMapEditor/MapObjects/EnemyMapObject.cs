@@ -37,7 +37,6 @@ namespace RogueCastleEditor
             {
                 clonedObj.AddChild(obj.Clone() as GameObj);
             }
-
             clonedObj.Name = this.Name;
             clonedObj.Position = this.Position;
             clonedObj.Scale = this.Scale;
@@ -49,6 +48,7 @@ namespace RogueCastleEditor
             clonedObj.Type = this.Type;
             clonedObj.Tag = this.Tag;
             clonedObj.InitialLogicDelay = this.InitialLogicDelay;
+            clonedObj.Anchor = this.Anchor;
 
             clonedObj.BasicScale = this.BasicScale;
             clonedObj.AdvancedScale = this.AdvancedScale;

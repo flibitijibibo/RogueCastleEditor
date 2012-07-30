@@ -131,9 +131,18 @@ namespace RogueCastleEditor
                     xMovement += snapX;
                     yMovement += snapY;
 
+                    EnemyMapObject enemy = obj as EnemyMapObject;
+                    if (enemy != null)
+                    {
+                        GameObj child = enemy.GetChildAt(0);
+                        Vector2 positionOffset = new Vector2(child.X - child.AnchorX, child.Height + (child.Y + child.AnchorY));//new Vector2(enemy.Width - enemy.GetChildAt(0).Position.X, enemy.Height - enemy.GetChildAt(0).Position.Y);
+                        xMovement -= (int)positionOffset.X;
+                        yMovement -= (int)positionOffset.Y;
+                    }
+
                     xMovement -= (int)obj.X;
                     yMovement -= (int)obj.Y;
-;
+
                     for (int i = 0; i < ControllerRef.SelectedObjects.Count; i++)
                     {
                         ControllerRef.SelectedObjects[i].X += xMovement;

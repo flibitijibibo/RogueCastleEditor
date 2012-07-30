@@ -189,7 +189,10 @@ namespace RogueCastleEditor
             DrawSelectedObjectsRect();
 
             foreach (RoomObj room in RoomObjectList)
-                m_camera.DrawString(MapDisplayXnaControl.Font, room.Width / Consts.ScreenWidth + "x" + room.Height / Consts.ScreenHeight, room.Position, Color.White, MathHelper.ToRadians(room.Rotation), Vector2.Zero, 1 / m_camera.Zoom, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0);
+                m_camera.DrawString(MapDisplayXnaControl.Font, room.Width / Consts.ScreenWidth + "x" + room.Height / Consts.ScreenHeight, room.Position, Color.White, MathHelper.ToRadians(room.Rotation), Vector2.Zero, 1 / m_camera.Zoom, SpriteEffects.None, 0);
+
+            m_camera.Draw(Consts.GenericTexture, new Rectangle(10000, (int)Camera.TopLeftCorner.Y, (int)(5  * 1 / m_camera.Zoom), (int)(2000 * 1 / m_camera.Zoom)), Color.Black);
+            m_camera.DrawString(MapDisplayXnaControl.Font, "Pool Bounds", new Vector2(10000 + (10 * 1/Camera.Zoom), Camera.TopLeftCorner.Y), Color.Black, 0, Vector2.Zero, 1 * 1 / m_camera.Zoom, SpriteEffects.None, 1);
 
             DrawCameraView();
             m_camera.End();

@@ -29,13 +29,13 @@ namespace RogueCastleEditor
             {
                 clonedObj.AddChild(obj.Clone() as GameObj);
             }
-
             clonedObj.Name = this.Name;
             clonedObj.Position = this.Position;
             clonedObj.Scale = this.Scale;
             clonedObj.Rotation = this.Rotation;
             clonedObj.Flip = this.Flip;
             clonedObj.SpriteName = this.SpriteName;
+            clonedObj.Anchor = this.Anchor;
 
             return clonedObj;
         }

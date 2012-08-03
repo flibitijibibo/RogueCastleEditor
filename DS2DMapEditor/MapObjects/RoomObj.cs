@@ -40,7 +40,7 @@ namespace RogueCastleEditor
             Camera2D cam = mapDisplayRef.Camera;
 
             // Creating a background texture that is a power of 2. Otherwise SamplerState.LinearWrap will not work in the draw call.
-            SpriteObj background = new SpriteObj("CastleBG1_Sprite");
+            SpriteObj background = new SpriteObj("CastleBG5_Sprite");
             background.Scale = new Vector2(512 / background.Width, 512 / background.Height);
             m_backgroundTexture = new RenderTarget2D(cam.GraphicsDevice, 512, 512);
             cam.GraphicsDevice.SetRenderTarget(m_backgroundTexture);

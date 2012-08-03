@@ -463,7 +463,7 @@ namespace RogueCastleEditor
 
             m_selectToolObj.Action_MouseUp(sender, e);
 
-            if (m_toolObject != null && m_selectToolObj.ShiftHeld == false && m_selectToolObj.CtrlHeld == false)
+            if (m_toolObject != null && m_selectToolObj.ShiftHeld == false && m_selectToolObj.CtrlHeld == false || (m_toolObject != null && m_toolObject.ToolType == Consts.TOOLTYPE_SCALE))
                 m_toolObject.Action_MouseUp(sender, e);
 
         }

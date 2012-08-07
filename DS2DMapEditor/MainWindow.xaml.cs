@@ -565,6 +565,8 @@ namespace RogueCastleEditor
                     {
                         type = "SpriteObj";
                     }
+                    else if (obj is PlayerStartObj)
+                        type = "PlayerStartObj";
 
                     writer.WriteStartElement("GameObject");
                     writer.WriteAttributeString("Type", type);

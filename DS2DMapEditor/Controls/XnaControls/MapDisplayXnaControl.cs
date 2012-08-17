@@ -385,7 +385,10 @@ namespace RogueCastleEditor
                 if (!(obj is PlayerStartObj))
                 {
                     m_clipboardPositions.Add(new Vector2(obj.X - m_camera.X, obj.Y - m_camera.Y));
-                    this.ObjectList.Remove(obj);
+                    if (obj is RoomObj)
+                        this.RoomObjectList.Remove(obj);
+                    else
+                        this.ObjectList.Remove(obj);
                     m_clipboard.Add(obj);
                     undoList.Add(obj);
                     if (obj is IPhysicsObj)
@@ -728,6 +731,10 @@ namespace RogueCastleEditor
                 this.ObjectList.Remove(this.PlayerStart);
                 this.ObjectList.Insert(0, this.PlayerStart);
             }
+
+            IPropertiesObj propertiesObj = obj as IPropertiesObj;
+            if (propertiesObj != null)
+                propertiesObj.LevelType = ControllerRef.GlobalLayerList.IndexOf(this.ObjectList);
         }
 
         private void DrawCameraView()

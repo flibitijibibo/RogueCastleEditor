@@ -76,6 +76,16 @@ namespace RogueCastleEditor
         {
             HwndSource src = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
             src.AddHook(new HwndSourceHook(WndProc));
+
+            AddBackgroundLayers();
+        }
+
+        private void AddBackgroundLayers()
+        {
+            XAML_mapTabControl.AddLayer("Castle Layer", 1);
+            XAML_mapTabControl.AddLayer("Garden Layer", 2);
+            XAML_mapTabControl.AddLayer("Dungeon Layer", 3);
+            XAML_mapTabControl.AddLayer("Tower Layer", 4);
         }
 
         //Forces mouse wheel input even if the focus is not on the XnaControl.
@@ -350,6 +360,8 @@ namespace RogueCastleEditor
             ChangeMade = false;
             ChangeTitle("Rogue Castle Editor - New Map");
             UndoManager.ResetManager(); //Disabled for now because it was causing diposed objects to be disposed again.
+
+            AddBackgroundLayers(); // Adds the Castle, Garden, Etc. layers.
         }
 
         public void ChangeTitle(string newTitle)
@@ -611,6 +623,9 @@ namespace RogueCastleEditor
 
                     if (type == "SpriteObj")
                         writer.WriteAttributeString("SpriteName", (obj as MapSpriteObj).SpriteName);
+
+                    if (obj is IPropertiesObj)
+                        writer.WriteAttributeString("LevelType", (obj as IPropertiesObj).LevelType.ToString());
                     
                     writer.WriteEndElement();
                 }
@@ -852,7 +867,9 @@ namespace RogueCastleEditor
 
                             if (newObj != null)
                                 ParseGenericXML(newObj, reader);
+
                             XAML_mapDisplayXnaControl.AddSprite(newObj, true, true);
+                            XAML_mapDisplayXnaControl.ObjectList = GlobalLayerList[LayerType.GAME]; // This must be changed back to the default object list once the sprite has been added.
                         }
                     }
                 }
@@ -894,6 +911,14 @@ namespace RogueCastleEditor
             {
                 obj.ScaleX = scaleX;
                 obj.ScaleY = scaleY;
+            }
+
+            IPropertiesObj propertiesObj = obj as IPropertiesObj;
+            if (propertiesObj != null)
+            {
+                if (reader.MoveToAttribute("LevelType"))
+                    propertiesObj.LevelType = int.Parse(reader.Value);
+                XAML_mapDisplayXnaControl.ObjectList = GlobalLayerList[propertiesObj.LevelType]; // This is changed so that when AddSprite is called, it is added to the correct layer.
             }
 
             if (obj is RoomObj)

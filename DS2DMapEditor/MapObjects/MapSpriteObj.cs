@@ -8,6 +8,8 @@ namespace RogueCastleEditor
 {
     class MapSpriteObj : PhysicsObj, IPropertiesObj
     {
+        public int LevelType { get; set; }
+
         public MapSpriteObj(string spriteName, PhysicsManager physicsManager)
             : base(spriteName, physicsManager)
         {
@@ -31,7 +33,7 @@ namespace RogueCastleEditor
             clonedSprite.Scale = this.Scale;
             clonedSprite.Rotation = this.Rotation;
             clonedSprite.Flip = this.Flip;
-
+            clonedSprite.LevelType = this.LevelType;
             return clonedSprite;
         }
 

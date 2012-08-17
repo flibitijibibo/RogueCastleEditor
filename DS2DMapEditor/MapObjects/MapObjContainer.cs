@@ -8,6 +8,10 @@ namespace RogueCastleEditor
 {
     public class MapObjContainer : PhysicsObjContainer, IPropertiesObj
     {
+
+        public int LevelType { get; set; }
+
+
         public MapObjContainer() 
         {
             IsCollidable = false;
@@ -36,6 +40,7 @@ namespace RogueCastleEditor
             clonedObj.Flip = this.Flip;
             clonedObj.SpriteName = this.SpriteName;
             clonedObj.Anchor = this.Anchor;
+            clonedObj.LevelType = this.LevelType;
 
             return clonedObj;
         }

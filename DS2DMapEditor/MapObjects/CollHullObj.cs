@@ -20,6 +20,8 @@ namespace RogueCastleEditor
         public bool CollidesLeft = true;
         public bool CollidesRight = true;
 
+        public int LevelType { get; set; }
+
         public CollHullObj(int x, int y, int width, int height)
         {
             this.X = x;
@@ -159,6 +161,7 @@ namespace RogueCastleEditor
             collHullToClone.IsBorder = this.IsBorder;
 
             collHullToClone.IsBossDoor = this.IsBossDoor;
+            collHullToClone.LevelType = this.LevelType;
 
             return collHullToClone;
         }

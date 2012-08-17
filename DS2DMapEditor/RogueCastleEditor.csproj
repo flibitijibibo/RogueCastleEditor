@@ -91,6 +91,7 @@
     <Compile Include="EditorConfig.cs" />
     <Compile Include="Controls\MapTabControl.cs" />
     <Compile Include="Controls\XnaControls\EnemyDisplayXnaControl.cs" />
+    <Compile Include="LayerType.cs" />
     <Compile Include="MapObjects\EnemyOrbObj.cs" />
     <Compile Include="ToolObjects\EnemyOrbTool.cs" />
     <Compile Include="MapObjects\EnemyMapObject.cs" />

@@ -19,5 +19,7 @@ namespace RogueCastleEditor
         float ScaleY { get; set; }
 
         SpriteEffects Flip {get;set;}
+
+        int LevelType { get; set; }
     }
 }

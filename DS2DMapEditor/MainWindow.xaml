@@ -175,13 +175,13 @@
                                                 Value="{Binding RelativeSource={RelativeSource Self}}" />
                     </Style>
                 </TabControl.ItemContainerStyle>
-                <TabControl.ContextMenu>
+                <!--<TabControl.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Add Foreground Layer" Tag="AddForeground" Click="MapTabControl_Click"/>
                         <MenuItem Header="Add Background Layer" Tag="AddBackground" Click="MapTabControl_Click"/>
                         <MenuItem Header="Remove Selected Layer" Tag="RemoveLayer" Click="MapTabControl_Click"/>
                     </ContextMenu>
-                </TabControl.ContextMenu>
+                </TabControl.ContextMenu>-->
                 <TabItem Header="Game Layer" FontWeight="Bold">
                     <my:MapDisplayXnaControl x:Name="XAML_mapDisplayXnaControl" />
                 </TabItem>

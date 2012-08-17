@@ -10,6 +10,7 @@ namespace RogueCastleEditor
     {
         private List<ITriggerableObj> m_triggerList; // Convert to observable collection?
         public bool IsPhysicsObj { get; set; }
+        public int LevelType { get; set; }
 
         public MapTriggerObj(int width, int height)
             : base(width, height)
@@ -20,6 +21,7 @@ namespace RogueCastleEditor
         public override object Clone()
         {
             MapTriggerObj triggerObj = new MapTriggerObj(Width, Height);
+            triggerObj.LevelType = this.LevelType;
             return triggerObj;
         }
     }

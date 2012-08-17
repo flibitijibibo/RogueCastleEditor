@@ -10,6 +10,7 @@ namespace RogueCastleEditor
     public class EnemyOrbObj : SpriteObj, IPropertiesObj
     {
         public int OrbType = 0;
+        public int LevelType { get; set; }
 
         public EnemyOrbObj() : base("Orb_Sprite")
         {
@@ -48,6 +49,7 @@ namespace RogueCastleEditor
             clonedSprite.Flip = this.Flip;
 
             clonedSprite.OrbType = this.OrbType;
+            clonedSprite.LevelType = this.LevelType;
 
             return clonedSprite;
         }

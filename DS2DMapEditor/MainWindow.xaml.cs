@@ -624,6 +624,9 @@ namespace RogueCastleEditor
                     if (type == "SpriteObj")
                         writer.WriteAttributeString("SpriteName", (obj as MapSpriteObj).SpriteName);
 
+                    if (type == "ChestObj")
+                        writer.WriteAttributeString("Fairy", (obj as CollHullObj).IsFairyChest.ToString());
+
                     if (obj is IPropertiesObj)
                         writer.WriteAttributeString("LevelType", (obj as IPropertiesObj).LevelType.ToString());
                     
@@ -779,6 +782,8 @@ namespace RogueCastleEditor
                                     break;
                                 case ("ChestObj"):
                                     newObj = new CollHullObj(0, 0, 0, 0) { IsChest = true };
+                                    if (reader.MoveToAttribute("Fairy"))
+                                        (newObj as CollHullObj).IsFairyChest = bool.Parse(reader.Value);
                                     break;
                                 case ("HazardObj"):
                                     newObj = new CollHullObj(0, 0, 0, 0) { IsHazard = true };

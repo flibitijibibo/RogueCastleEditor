@@ -11,6 +11,7 @@ namespace RogueCastleEditor
     public class CollHullObj : GameObj, IPropertiesObj
     {
         public bool IsChest = false;
+        public bool IsFairyChest = false;
         public bool IsTrigger = false;
         public bool IsHazard = false;
         public bool IsBorder = false;
@@ -162,6 +163,8 @@ namespace RogueCastleEditor
 
             collHullToClone.IsBossDoor = this.IsBossDoor;
             collHullToClone.LevelType = this.LevelType;
+
+            collHullToClone.IsFairyChest = this.IsFairyChest;
 
             return collHullToClone;
         }

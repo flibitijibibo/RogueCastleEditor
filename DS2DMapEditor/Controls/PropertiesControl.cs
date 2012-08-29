@@ -80,6 +80,9 @@ namespace RogueCastleEditor
 
                     if (hull.IsTrigger == true)
                         CreateNewCheckBox("Is Boss Door", "BossDoor", hull.IsBossDoor, 20);
+
+                    if (hull.IsChest == true)
+                        CreateNewCheckBox("Is Fairy Chest", "FairyChest", hull.IsFairyChest, 20);
                 }
             }
 
@@ -587,6 +590,12 @@ namespace RogueCastleEditor
                         (m_selectedObj as RoomObj).DisplayBG = true;
                     else
                         (m_selectedObj as RoomObj).DisplayBG = false;
+                    break;
+                case ("FairyChest"):
+                    if (box.IsChecked == true)
+                        (m_selectedObj as CollHullObj).IsFairyChest = true;
+                    else
+                        (m_selectedObj as CollHullObj).IsFairyChest = false;
                     break;
             }
         }

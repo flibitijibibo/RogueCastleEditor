@@ -15,6 +15,7 @@ namespace RogueCastleEditor
         MapDisplayXnaControl m_mapDisplayRef;
         MainWindow m_mainWindowRef;
         private RenderTarget2D m_backgroundTexture;
+        private Vector2 m_backgroundArtScale;
 
         public bool AddToCastlePool { get; set; }
         public bool AddToGardenPool { get; set; }
@@ -40,14 +41,17 @@ namespace RogueCastleEditor
             Camera2D cam = mapDisplayRef.Camera;
 
             // Creating a background texture that is a power of 2. Otherwise SamplerState.LinearWrap will not work in the draw call.
-            SpriteObj background = new SpriteObj("CastleBG5_Sprite");
-            background.Scale = new Vector2(512 / background.Width, 512 / background.Height);
+            SpriteObj background = new SpriteObj("CastleBG1_Sprite");
+            background.Scale = new Vector2(512f / background.Width, 512f / background.Height);
             m_backgroundTexture = new RenderTarget2D(cam.GraphicsDevice, 512, 512);
             cam.GraphicsDevice.SetRenderTarget(m_backgroundTexture);
             cam.Begin();
             background.Draw(cam);
             cam.End();
             cam.GraphicsDevice.SetRenderTarget(null);
+            background.Scale = new Vector2(1, 1);
+            background.Scale = new Vector2(background.Width / 512f, background.Height / 512f);
+            m_backgroundArtScale = new Vector2(0.8f, 0.8f) * background.Scale;
         }
 
         public override void Draw(Camera2D camera)
@@ -76,7 +80,7 @@ namespace RogueCastleEditor
             {
                 camera.End();
                 camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearWrap, null, null, null, camera.GetTransformation());
-                camera.Draw(m_backgroundTexture, this.Position, new Rectangle(0, 0, this.Width, this.Height), Color.White * bgOpacity, 0, Vector2.Zero, this.Scale, SpriteEffects.None, 0);
+                camera.Draw(m_backgroundTexture, this.Position, new Rectangle(0, 0, (int)(this.Width * 1/m_backgroundArtScale.X), (int)(this.Height * 1/m_backgroundArtScale.Y)), Color.White * bgOpacity, 0, Vector2.Zero, m_backgroundArtScale, SpriteEffects.None, 0);
                 camera.End();
                 camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.GetTransformation());
             }

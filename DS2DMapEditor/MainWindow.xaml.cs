@@ -591,7 +591,6 @@ namespace RogueCastleEditor
                         writer.WriteAttributeString("EnemyType", enemy.Type);
                         writer.WriteAttributeString("Difficulty", enemy.Difficulty.ToString());
                         writer.WriteAttributeString("InitialDelay", enemy.InitialLogicDelay.ToString());
-                        writer.WriteAttributeString("Flip", (enemy.Flip == SpriteEffects.FlipHorizontally).ToString());
                     }
                     writer.WriteAttributeString("Name", obj.Name);
                     writer.WriteAttributeString("X", obj.X.ToString());
@@ -601,6 +600,7 @@ namespace RogueCastleEditor
                     writer.WriteAttributeString("ScaleX", obj.ScaleX.ToString());
                     writer.WriteAttributeString("ScaleY", obj.ScaleY.ToString());
                     writer.WriteAttributeString("Rotation", obj.Rotation.ToString());
+                    writer.WriteAttributeString("Flip", (obj.Flip == SpriteEffects.FlipHorizontally).ToString());
                     writer.WriteAttributeString("Tag", obj.Tag);
 
                     if (type == "DoorObj")
@@ -948,6 +948,14 @@ namespace RogueCastleEditor
                 float rotation = float.Parse(reader.Value);
                 obj.Rotation = rotation;
             }
+
+            if (reader.MoveToAttribute("Flip"))
+            {
+                bool flip = bool.Parse(reader.Value);
+                if (flip == true)
+                    obj.Flip = SpriteEffects.FlipHorizontally;
+            }
+
             if (reader.MoveToAttribute("Tag"))
             {
                 string tag = reader.Value;

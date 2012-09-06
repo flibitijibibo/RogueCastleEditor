@@ -10,12 +10,13 @@ namespace RogueCastleEditor
     {
 
         public int LevelType { get; set; }
-
+        public bool Breakable { get; set; }
 
         public MapObjContainer() 
         {
             IsCollidable = false;
             IsWeighted = false;
+            Breakable = false;
         }
 
         public MapObjContainer(string spriteName)
@@ -41,6 +42,9 @@ namespace RogueCastleEditor
             clonedObj.SpriteName = this.SpriteName;
             clonedObj.Anchor = this.Anchor;
             clonedObj.LevelType = this.LevelType;
+            clonedObj.Breakable = this.Breakable;
+            clonedObj.IsCollidable = this.IsCollidable;
+            clonedObj.IsWeighted = this.IsWeighted;
 
             return clonedObj;
         }

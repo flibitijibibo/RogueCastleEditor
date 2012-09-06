@@ -577,6 +577,13 @@ namespace RogueCastleEditor
                     {
                         type = "SpriteObj";
                     }
+                    else if (obj is MapObjContainer)
+                    {
+                        if ((obj as MapObjContainer).IsCollidable == true || (obj as MapObjContainer).IsWeighted == true)
+                            type = "PhysicsObjContainer";
+                        else
+                            type = "ObjContainer";
+                    }
                     else if (obj is PlayerStartObj)
                         type = "PlayerStartObj";
 
@@ -623,6 +630,14 @@ namespace RogueCastleEditor
 
                     if (type == "SpriteObj")
                         writer.WriteAttributeString("SpriteName", (obj as MapSpriteObj).SpriteName);
+
+                    if (type == "PhysicsObjContainer" || type == "ObjContainer")
+                    {
+                        writer.WriteAttributeString("SpriteName", (obj as MapObjContainer).SpriteName);
+                        writer.WriteAttributeString("Weighted", (obj as MapObjContainer).IsWeighted.ToString());
+                        writer.WriteAttributeString("Collidable", (obj as MapObjContainer).IsCollidable.ToString());
+                        writer.WriteAttributeString("Breakable", (obj as MapObjContainer).Breakable.ToString());
+                    }
 
                     if (type == "ChestObj")
                         writer.WriteAttributeString("Fairy", (obj as CollHullObj).IsFairyChest.ToString());
@@ -851,10 +866,12 @@ namespace RogueCastleEditor
                                 case ("PhysicsObjContainer"):
                                 case ("ObjContainer"):
                                     newObj = new MapObjContainer(spriteName);
-                                    if (reader.MoveToAttribute("IsCollidable"))
+                                    if (reader.MoveToAttribute("Collidable"))
                                         (newObj as IPhysicsObj).IsCollidable = bool.Parse(reader.Value);
-                                    if (reader.MoveToAttribute("IsWeighted"))
+                                    if (reader.MoveToAttribute("Weighted"))
                                         (newObj as IPhysicsObj).IsWeighted = bool.Parse(reader.Value);
+                                    if (reader.MoveToAttribute("Breakable"))
+                                        (newObj as MapObjContainer).Breakable = bool.Parse(reader.Value);
                                     break;
                                 case ("PhysicsObj"):
                                 case ("SpriteObj"):

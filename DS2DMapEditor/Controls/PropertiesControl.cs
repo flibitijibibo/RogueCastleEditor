@@ -278,6 +278,9 @@ namespace RogueCastleEditor
                 orbRad2.Checked += RadioButtonEventHandler;
                 orbRad3.Checked += RadioButtonEventHandler;
             }
+
+            if (obj is MapObjContainer)
+                CreateNewCheckBox("Is Breakable", "Breakable", (obj as MapObjContainer).Breakable, 5);
         }
 
         private TextBox CreateNewTextBox(string boxName, string boxTag, string boxText)
@@ -596,6 +599,12 @@ namespace RogueCastleEditor
                         (m_selectedObj as CollHullObj).IsFairyChest = true;
                     else
                         (m_selectedObj as CollHullObj).IsFairyChest = false;
+                    break;
+                case ("Breakable"):
+                    if (box.IsChecked == true)
+                        (m_selectedObj as MapObjContainer).Breakable = true;
+                    else
+                        (m_selectedObj as MapObjContainer).Breakable = false;
                     break;
             }
         }

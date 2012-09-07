@@ -11,6 +11,7 @@ namespace RogueCastleEditor
     {
         public int OrbType = 0;
         public int LevelType { get; set; }
+        public bool ForceFlying { get; set; }
 
         public EnemyOrbObj() : base("Orb_Sprite")
         {
@@ -50,7 +51,7 @@ namespace RogueCastleEditor
 
             clonedSprite.OrbType = this.OrbType;
             clonedSprite.LevelType = this.LevelType;
-
+            clonedSprite.ForceFlying = this.ForceFlying;
             return clonedSprite;
         }
     }

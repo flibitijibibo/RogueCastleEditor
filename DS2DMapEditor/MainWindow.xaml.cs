@@ -626,7 +626,10 @@ namespace RogueCastleEditor
                     }
 
                     if (type == "EnemyOrbObj")
+                    {
                         writer.WriteAttributeString("OrbType", (obj as EnemyOrbObj).OrbType.ToString());
+                        writer.WriteAttributeString("ForceFlying", (obj as EnemyOrbObj).ForceFlying.ToString());
+                    }
 
                     if (type == "SpriteObj")
                         writer.WriteAttributeString("SpriteName", (obj as MapSpriteObj).SpriteName);
@@ -987,6 +990,8 @@ namespace RogueCastleEditor
             if (reader.MoveToAttribute("CollidesRight"))
                 (obj as CollHullObj).CollidesRight = bool.Parse(reader.Value);
 
+            if (reader.MoveToAttribute("ForceFlying"))
+                (obj as EnemyOrbObj).ForceFlying = bool.Parse(reader.Value);
             if (reader.MoveToAttribute("OrbType"))
                 (obj as EnemyOrbObj).OrbType = int.Parse(reader.Value);
         }

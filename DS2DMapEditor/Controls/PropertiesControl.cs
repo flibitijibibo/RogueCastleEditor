@@ -231,6 +231,8 @@ namespace RogueCastleEditor
 
             if (obj is EnemyOrbObj)
             {
+                CreateNewCheckBox("Force Flying", "ForceFlying", (obj as EnemyOrbObj).ForceFlying);
+
                 TextBlock orb0 = new TextBlock();
                 orb0.Margin = new Thickness(0, 20, 0, 0);
                 orb0.Text = "Red Orb";
@@ -605,6 +607,12 @@ namespace RogueCastleEditor
                         (m_selectedObj as MapObjContainer).Breakable = true;
                     else
                         (m_selectedObj as MapObjContainer).Breakable = false;
+                    break;
+                case("ForceFlying"):
+                    if (box.IsChecked == true)
+                        (m_selectedObj as EnemyOrbObj).ForceFlying = true;
+                    else
+                        (m_selectedObj as EnemyOrbObj).ForceFlying = false;
                     break;
             }
         }

@@ -64,7 +64,7 @@ namespace RogueCastleEditor
                     m_spriteList.Add(newSprite);
                     newSprite.PlayAnimation();
 
-                    if (m_posCountX >= 1)
+                    if (m_posCountX >= 3)
                     {
                         m_posCountX = 0;
                         m_posCountY++;
@@ -97,7 +97,7 @@ namespace RogueCastleEditor
                         m_spriteList.Add(newSprite);
                         newSprite.PlayAnimation();
 
-                        if (m_posCountX >= 1)
+                        if (m_posCountX >= 3)
                         {
                             m_posCountX = 0;
                             m_posCountY++;
@@ -133,10 +133,13 @@ namespace RogueCastleEditor
                 if (CollisionMath.Intersects(obj.Bounds, new Rectangle((int)(e.Position.X + m_camera.TopLeftCorner.X), 
                                                                         (int)(e.Position.Y + m_camera.TopLeftCorner.Y), 1, 1)))
                 {
+                    Vector2 storedScale = obj.Scale;
+                    obj.Scale = new Vector2(1, 1); // Set object scale back to 1 before cloning.
                     GameObj objToClone = obj.Clone() as GameObj;
                     objToClone.ScaleX = 1;
                     objToClone.ScaleY = 1;
                     ControllerRef.AddSprite(objToClone);
+                    obj.Scale = storedScale;
                 }
             }
         }

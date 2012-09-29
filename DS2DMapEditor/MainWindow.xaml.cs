@@ -522,6 +522,7 @@ namespace RogueCastleEditor
                 writer.WriteAttributeString("Height", room.Height.ToString());
                 writer.WriteAttributeString("ScaleX", room.ScaleX.ToString());
                 writer.WriteAttributeString("ScaleY", room.ScaleY.ToString());
+                writer.WriteAttributeString("Tag", room.Tag);
                 writer.WriteAttributeString("SelectionMode", room.SelectionMode.ToString());
                 writer.WriteAttributeString("DisplayBG", room.DisplayBG.ToString());
 

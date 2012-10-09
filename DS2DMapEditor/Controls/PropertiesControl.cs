@@ -232,6 +232,7 @@ namespace RogueCastleEditor
             if (obj is EnemyOrbObj)
             {
                 CreateNewCheckBox("Force Flying", "ForceFlying", (obj as EnemyOrbObj).ForceFlying);
+                CreateNewCheckBox("Is Waypoint", "IsWaypoint", (obj as EnemyOrbObj).IsWaypoint);
 
                 TextBlock orb0 = new TextBlock();
                 orb0.Margin = new Thickness(0, 20, 0, 0);
@@ -613,6 +614,12 @@ namespace RogueCastleEditor
                         (m_selectedObj as EnemyOrbObj).ForceFlying = true;
                     else
                         (m_selectedObj as EnemyOrbObj).ForceFlying = false;
+                    break;
+                case("IsWaypoint"):
+                    if (box.IsChecked == true)
+                        (m_selectedObj as EnemyOrbObj).IsWaypoint = true;
+                    else
+                        (m_selectedObj as EnemyOrbObj).IsWaypoint = false;
                     break;
             }
         }

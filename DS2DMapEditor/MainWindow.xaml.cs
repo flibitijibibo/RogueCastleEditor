@@ -630,6 +630,7 @@ namespace RogueCastleEditor
                     {
                         writer.WriteAttributeString("OrbType", (obj as EnemyOrbObj).OrbType.ToString());
                         writer.WriteAttributeString("ForceFlying", (obj as EnemyOrbObj).ForceFlying.ToString());
+                        writer.WriteAttributeString("IsWaypoint", (obj as EnemyOrbObj).IsWaypoint.ToString());
                     }
 
                     if (type == "SpriteObj")
@@ -995,6 +996,8 @@ namespace RogueCastleEditor
                 (obj as EnemyOrbObj).ForceFlying = bool.Parse(reader.Value);
             if (reader.MoveToAttribute("OrbType"))
                 (obj as EnemyOrbObj).OrbType = int.Parse(reader.Value);
+            if (reader.MoveToAttribute("IsWaypoint"))
+                (obj as EnemyOrbObj).IsWaypoint = bool.Parse(reader.Value);
         }
 
         public void LoadConfigXML()

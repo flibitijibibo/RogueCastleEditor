@@ -12,6 +12,7 @@ namespace RogueCastleEditor
         public int OrbType = 0;
         public int LevelType { get; set; }
         public bool ForceFlying { get; set; }
+        public bool IsWaypoint { get; set; }
 
         public EnemyOrbObj() : base("Orb_Sprite")
         {
@@ -36,7 +37,10 @@ namespace RogueCastleEditor
             else
                 this.Opacity = 0.5f;
 
-            base.Draw(camera);
+            if (IsWaypoint)
+                camera.Draw(Consts.GenericTexture, new Rectangle((int)this.X - 20, (int)this.Y - 20, 40, 40), this.TextureColor);
+            else
+                base.Draw(camera);
         }
 
         public override object Clone()
@@ -52,6 +56,7 @@ namespace RogueCastleEditor
             clonedSprite.OrbType = this.OrbType;
             clonedSprite.LevelType = this.LevelType;
             clonedSprite.ForceFlying = this.ForceFlying;
+            clonedSprite.IsWaypoint = this.IsWaypoint;
             return clonedSprite;
         }
     }

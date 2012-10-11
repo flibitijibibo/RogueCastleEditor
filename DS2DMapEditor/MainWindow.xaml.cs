@@ -580,7 +580,7 @@ namespace RogueCastleEditor
                     }
                     else if (obj is MapObjContainer)
                     {
-                        if ((obj as MapObjContainer).IsCollidable == true || (obj as MapObjContainer).IsWeighted == true)
+                        if ((obj as MapObjContainer).IsCollidable == true || (obj as MapObjContainer).IsWeighted == true || (obj as MapObjContainer).Breakable == true)
                             type = "PhysicsObjContainer";
                         else
                             type = "ObjContainer";
@@ -634,7 +634,10 @@ namespace RogueCastleEditor
                     }
 
                     if (type == "SpriteObj")
+                    {
                         writer.WriteAttributeString("SpriteName", (obj as MapSpriteObj).SpriteName);
+                        writer.WriteAttributeString("BGLayer", (obj as MapSpriteObj).OnBGLayer.ToString());
+                    }
 
                     if (type == "PhysicsObjContainer" || type == "ObjContainer")
                     {
@@ -642,6 +645,7 @@ namespace RogueCastleEditor
                         writer.WriteAttributeString("Weighted", (obj as MapObjContainer).IsWeighted.ToString());
                         writer.WriteAttributeString("Collidable", (obj as MapObjContainer).IsCollidable.ToString());
                         writer.WriteAttributeString("Breakable", (obj as MapObjContainer).Breakable.ToString());
+                        writer.WriteAttributeString("BGLayer", (obj as MapObjContainer).OnBGLayer.ToString());
                     }
 
                     if (type == "ChestObj")
@@ -998,6 +1002,14 @@ namespace RogueCastleEditor
                 (obj as EnemyOrbObj).OrbType = int.Parse(reader.Value);
             if (reader.MoveToAttribute("IsWaypoint"))
                 (obj as EnemyOrbObj).IsWaypoint = bool.Parse(reader.Value);
+            if (reader.MoveToAttribute("BGLayer"))
+            {
+                MapObjContainer mapObjContainer = obj as MapObjContainer;
+                if (mapObjContainer == null)
+                    (obj as MapSpriteObj).OnBGLayer = bool.Parse(reader.Value);
+                else
+                    mapObjContainer.OnBGLayer = bool.Parse(reader.Value);
+            }
         }
 
         public void LoadConfigXML()

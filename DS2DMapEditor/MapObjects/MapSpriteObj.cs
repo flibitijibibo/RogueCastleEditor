@@ -9,6 +9,7 @@ namespace RogueCastleEditor
     class MapSpriteObj : PhysicsObj, IPropertiesObj
     {
         public int LevelType { get; set; }
+        public bool OnBGLayer { get; set; }
 
         public MapSpriteObj(string spriteName, PhysicsManager physicsManager)
             : base(spriteName, physicsManager)
@@ -34,6 +35,8 @@ namespace RogueCastleEditor
             clonedSprite.Rotation = this.Rotation;
             clonedSprite.Flip = this.Flip;
             clonedSprite.LevelType = this.LevelType;
+            clonedSprite.OnBGLayer = this.OnBGLayer;
+
             return clonedSprite;
         }
 

@@ -62,10 +62,10 @@ namespace RogueCastleEditor
                     if ((obj is MapSpriteObj ||obj is MapObjContainer) && ControllerRef.SelectSpriteObjs == true)
                         selectObject = true;
 
-                    if (obj is EnemyMapObject)
+                    if (obj is EnemyMapObject && ControllerRef.SelectSpriteObjs)
                         selectObject = true;
 
-                    if (obj is EnemyOrbObj)
+                    if (obj is EnemyOrbObj && ControllerRef.SelectSpriteObjs)
                         selectObject = true;
 
                     //if (CollisionMath.Intersects(obj.Bounds, new Rectangle((int)((e.Position.X * 1 / m_camera.Zoom) + m_camera.TopLeftCorner.X), (int)((e.Position.Y * 1 / m_camera.Zoom) + m_camera.TopLeftCorner.Y), 1, 1)))
@@ -240,9 +240,30 @@ namespace RogueCastleEditor
 
                 foreach (GameObj obj in listToCheck)
                 {
+                    bool selectObject = false;
+
+                    if (obj is CollHullObj)
+                    {
+                        if (ControllerRef.SelectCollHulls == true)
+                            selectObject = true;
+                    }
+
+                    if ((obj is MapSpriteObj || obj is MapObjContainer) && ControllerRef.SelectSpriteObjs == true)
+                        selectObject = true;
+
+                    if (obj is EnemyMapObject && ControllerRef.SelectSpriteObjs)
+                        selectObject = true;
+
+                    if (obj is EnemyOrbObj && ControllerRef.SelectSpriteObjs)
+                        selectObject = true;
+
+
                     //if (CollisionMath.Intersects(obj.Bounds, selectionRectangle))
-                    if (CollisionMath.RotatedRectIntersects(obj.Bounds, obj.Rotation, new Vector2(obj.Bounds.Width * 0.5f, obj.Bounds.Height * 0.5f), selectionRectangle, 0, Vector2.Zero))
-                        ControllerRef.SelectedObjects.Add(obj);
+                    if (selectObject == true)
+                    {
+                        if (CollisionMath.RotatedRectIntersects(obj.Bounds, obj.Rotation, new Vector2(obj.Bounds.Width * 0.5f, obj.Bounds.Height * 0.5f), selectionRectangle, 0, Vector2.Zero))
+                            ControllerRef.SelectedObjects.Add(obj);
+                    }
                 }
             }
             else if (ControllerRef.SelectedObjects.Count == 1)

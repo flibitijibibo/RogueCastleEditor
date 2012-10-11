@@ -52,13 +52,10 @@ namespace RogueCastleEditor
                 {
                     MapObjContainer newSprite = new MapObjContainer(name);
 
-                    // Only rescale the sprite if it is too large.
-                    //if (newSprite.Width > M_SPRITEDISPLAYSIZE || newSprite.Height > M_SPRITEDISPLAYSIZE)
-                    {
                         float scaleX = M_SPRITEDISPLAYSIZE / newSprite.Width;
                         float scaleY = M_SPRITEDISPLAYSIZE / newSprite.Height;
                         newSprite.Scale = new Vector2(scaleX, scaleY);
-                    }
+                    
                     newSprite.X = m_camera.TopLeftCorner.X - newSprite.Bounds.Left + (m_posCountX * M_SPRITEDISPLAYSIZE);
                     newSprite.Y = m_camera.TopLeftCorner.Y - newSprite.Bounds.Top + (m_posCountY * M_SPRITEDISPLAYSIZE);
                     m_spriteList.Add(newSprite);
@@ -74,13 +71,14 @@ namespace RogueCastleEditor
                 }
             }
 
+            if (charDataList != null)
+                m_separationLine = new Rectangle((int)m_camera.TopLeftCorner.X, (int)(m_camera.TopLeftCorner.Y + (m_posCountY + 1) * M_SPRITEDISPLAYSIZE) + 10, m_camera.Width, 2);
+
             if (spriteDataList != null)
             {
-                m_posCountX = 0;
-                m_posCountY++;
 
-                if (charDataList != null)
-                    m_separationLine = new Rectangle((int)m_camera.TopLeftCorner.X, (int)(m_camera.TopLeftCorner.Y + m_posCountY * M_SPRITEDISPLAYSIZE) + 10, m_camera.Width, 2);
+                m_posCountX = 0;
+                m_posCountY = 1;
 
                 foreach (string name in spriteDataList)
                 {
@@ -88,11 +86,11 @@ namespace RogueCastleEditor
                     {
                         MapSpriteObj newSprite = new MapSpriteObj(name);
                        
-                        float scaleX = M_SPRITEDISPLAYSIZE / newSprite.Width;
-                        float scaleY = M_SPRITEDISPLAYSIZE / newSprite.Height;
+                        float scaleX = (M_SPRITEDISPLAYSIZE /2f) / newSprite.Width;
+                        float scaleY = (M_SPRITEDISPLAYSIZE /2f) / newSprite.Height;
                         newSprite.Scale = new Vector2(scaleX, scaleY);
-                        newSprite.X = m_camera.TopLeftCorner.X - newSprite.Bounds.Left + (m_posCountX * M_SPRITEDISPLAYSIZE);
-                        newSprite.Y = m_camera.TopLeftCorner.Y - newSprite.Bounds.Top + (m_posCountY * M_SPRITEDISPLAYSIZE);
+                        newSprite.X = m_camera.TopLeftCorner.X - newSprite.Bounds.Left + (m_posCountX * M_SPRITEDISPLAYSIZE/2f);
+                        newSprite.Y = m_separationLine.Y + (m_posCountY * M_SPRITEDISPLAYSIZE/2f);
 
                         m_spriteList.Add(newSprite);
                         newSprite.PlayAnimation();

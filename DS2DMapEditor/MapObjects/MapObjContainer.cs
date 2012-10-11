@@ -10,6 +10,7 @@ namespace RogueCastleEditor
     {
 
         public int LevelType { get; set; }
+        public bool OnBGLayer { get; set; }
         public bool Breakable { get; set; }
 
         public MapObjContainer() 
@@ -45,6 +46,7 @@ namespace RogueCastleEditor
             clonedObj.Breakable = this.Breakable;
             clonedObj.IsCollidable = this.IsCollidable;
             clonedObj.IsWeighted = this.IsWeighted;
+            clonedObj.OnBGLayer = this.OnBGLayer;
 
             return clonedObj;
         }

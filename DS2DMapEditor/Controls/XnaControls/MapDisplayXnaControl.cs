@@ -158,25 +158,25 @@ namespace RogueCastleEditor
             }
 
             ObservableCollection<GameObj> activeLayer = ControllerRef.GlobalLayerList[ControllerRef.SelectedLayerIndex];
+
             foreach (ObservableCollection<GameObj> objList in this.ControllerRef.GlobalLayerList)
             {
-                if (activeLayer == objList)
+                if (activeLayer != objList)
                 {
                     foreach (GameObj obj in objList)
                     {
-                        obj.Opacity = 1.0f;
-                        obj.Draw(m_camera);
-                    }
-                }
-                else
-                {
-                    foreach (GameObj obj in objList)
-                    {
-                        obj.Opacity = 0.3f;
+                        obj.Opacity = 0.1f;
                         obj.Draw(m_camera);
                     }
                 }
             }
+
+            foreach (GameObj obj in activeLayer)
+            {
+                obj.Opacity = 1.0f;
+                obj.Draw(m_camera);
+            }
+
 
             m_physicsManager.DrawAllCollisionBoxes(m_camera, Consts.GenericTexture, DS2DEngine.Consts.TERRAIN_HITBOX);
             m_physicsManager.DrawAllCollisionBoxes(m_camera, Consts.GenericTexture, DS2DEngine.Consts.WEAPON_HITBOX);

@@ -283,7 +283,13 @@ namespace RogueCastleEditor
             }
 
             if (obj is MapObjContainer)
+            {
+                CreateNewCheckBox("On BG Layer", "OnBGLayerContainer", (obj as MapObjContainer).OnBGLayer, 5);
                 CreateNewCheckBox("Is Breakable", "Breakable", (obj as MapObjContainer).Breakable, 5);
+            }
+
+            if (obj is MapSpriteObj)
+                CreateNewCheckBox("On BG Layer", "OnBGLayer", (obj as MapSpriteObj).OnBGLayer, 5);
         }
 
         private TextBox CreateNewTextBox(string boxName, string boxTag, string boxText)
@@ -453,7 +459,7 @@ namespace RogueCastleEditor
                     else
                         m_selectedObj.Flip = Microsoft.Xna.Framework.Graphics.SpriteEffects.None;
                     break;
-                case("IsWeighted"):
+                case ("IsWeighted"):
                     if (box.IsChecked == true)
                         (m_selectedObj as IPhysicsObj).IsWeighted = true;
                     else
@@ -465,13 +471,13 @@ namespace RogueCastleEditor
                     else
                         (m_selectedObj as IPhysicsObj).IsCollidable = false;
                     break;
-                case("PlayAnimation"):
+                case ("PlayAnimation"):
                     if (box.IsChecked == true)
                         (m_selectedObj as IAnimateableObj).PlayAnimation();
                     else
                         (m_selectedObj as IAnimateableObj).StopAnimation();
                     break;
-                case("TriggerCheckBox"):
+                case ("TriggerCheckBox"):
                     if (box.IsChecked == true)
                     {
                         (m_selectedObj as CollHullObj).IsTrigger = true;
@@ -486,7 +492,7 @@ namespace RogueCastleEditor
                         ShowObjProperties(m_selectedObj);
                     }
                     break;
-                case("ChestCheckBox"):
+                case ("ChestCheckBox"):
                     if (box.IsChecked == true)
                     {
                         (m_selectedObj as CollHullObj).IsChest = true;
@@ -531,13 +537,13 @@ namespace RogueCastleEditor
                         ShowObjProperties(m_selectedObj);
                     }
                     break;
-                case("BossDoor"):
+                case ("BossDoor"):
                     if (box.IsChecked == true)
                         (m_selectedObj as CollHullObj).IsBossDoor = true;
                     else
                         (m_selectedObj as CollHullObj).IsBossDoor = false;
                     break;
-                case("CollidesTop"):
+                case ("CollidesTop"):
                     if (box.IsChecked == true)
                         (m_selectedObj as CollHullObj).CollidesTop = true;
                     else
@@ -561,7 +567,7 @@ namespace RogueCastleEditor
                     else
                         (m_selectedObj as CollHullObj).CollidesRight = false;
                     break;
-                case("CastlePool"):
+                case ("CastlePool"):
                     if (box.IsChecked == true)
                         (m_selectedObj as RoomObj).AddToCastlePool = true;
                     else
@@ -573,13 +579,13 @@ namespace RogueCastleEditor
                     else
                         (m_selectedObj as RoomObj).AddToGardenPool = false;
                     break;
-                case("TowerPool"):
+                case ("TowerPool"):
                     if (box.IsChecked == true)
                         (m_selectedObj as RoomObj).AddToTowerPool = true;
                     else
                         (m_selectedObj as RoomObj).AddToTowerPool = false;
                     break;
-                case("DungeonPool"):
+                case ("DungeonPool"):
                     if (box.IsChecked == true)
                         (m_selectedObj as RoomObj).AddToDungeonPool = true;
                     else
@@ -591,7 +597,7 @@ namespace RogueCastleEditor
                     else
                         (m_selectedObj as EnemyMapObject).Procedural = false;
                     break;
-                case("DisplayBG"):
+                case ("DisplayBG"):
                     if (box.IsChecked == true)
                         (m_selectedObj as RoomObj).DisplayBG = true;
                     else
@@ -609,17 +615,29 @@ namespace RogueCastleEditor
                     else
                         (m_selectedObj as MapObjContainer).Breakable = false;
                     break;
-                case("ForceFlying"):
+                case ("ForceFlying"):
                     if (box.IsChecked == true)
                         (m_selectedObj as EnemyOrbObj).ForceFlying = true;
                     else
                         (m_selectedObj as EnemyOrbObj).ForceFlying = false;
                     break;
-                case("IsWaypoint"):
+                case ("IsWaypoint"):
                     if (box.IsChecked == true)
                         (m_selectedObj as EnemyOrbObj).IsWaypoint = true;
                     else
                         (m_selectedObj as EnemyOrbObj).IsWaypoint = false;
+                    break;
+                case ("OnBGLayer"):
+                    if (box.IsChecked == true)
+                        (m_selectedObj as MapSpriteObj).OnBGLayer = true;
+                    else
+                        (m_selectedObj as MapSpriteObj).OnBGLayer = false;
+                    break;
+                case ("OnBGLayerContainer"):
+                    if (box.IsChecked == true)
+                        (m_selectedObj as MapObjContainer).OnBGLayer = true;
+                    else
+                        (m_selectedObj as MapObjContainer).OnBGLayer = false;
                     break;
             }
         }

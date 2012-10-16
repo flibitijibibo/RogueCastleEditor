@@ -242,7 +242,7 @@ namespace RogueCastleEditor
                 {
                     bool selectObject = false;
 
-                    if (obj is CollHullObj)
+                    if (obj is CollHullObj || obj is PlayerStartObj)
                     {
                         if (ControllerRef.SelectCollHulls == true)
                             selectObject = true;

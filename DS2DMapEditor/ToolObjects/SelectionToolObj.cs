@@ -55,7 +55,7 @@ namespace RogueCastleEditor
                     {
                         anchorPt = Vector2.Zero;
                         objRect = (obj as CollHullObj).HullRect;
-                        if (ControllerRef.SelectCollHulls == true)
+                        if (ControllerRef.SelectCollHulls == true && ZHeld == false)
                             selectObject = true;
                     }
 
@@ -125,7 +125,7 @@ namespace RogueCastleEditor
 
                     int snapX = 0;
                     int snapY = 0;
-                    if (ControllerRef.SnapToGrid == true)
+                    if (ControllerRef.SnapToGrid == true && ZHeld == false)
                         CalculateSnapTo(xMovement, yMovement, ref snapX, ref snapY);
 
                     xMovement += snapX;
@@ -244,7 +244,7 @@ namespace RogueCastleEditor
 
                     if (obj is CollHullObj || obj is PlayerStartObj)
                     {
-                        if (ControllerRef.SelectCollHulls == true)
+                        if (ControllerRef.SelectCollHulls == true && ZHeld == false)
                             selectObject = true;
                     }
 
@@ -286,6 +286,9 @@ namespace RogueCastleEditor
             if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
                 CtrlHeld = true;
 
+            if (e.Key == Key.Z)
+                ZHeld = true;
+
             if  (e.Key == Key.Delete || e.Key == Key.Back)
             {
                 List<GameObj> objList = new List<GameObj>();
@@ -320,6 +323,9 @@ namespace RogueCastleEditor
 
             if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
                 CtrlHeld = false;
+
+            if (e.Key == Key.Z)
+                ZHeld = false;
         }
 
         public override void Draw()

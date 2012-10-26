@@ -16,6 +16,7 @@ namespace RogueCastleEditor
         protected GridObj m_gridObj;
         public bool ShiftHeld { get; set; }
         public bool CtrlHeld { get; set; }
+        public bool ZHeld { get; set; }
         public MapDisplayXnaControl ControllerRef;
 
         public ToolObj(Camera2D camera, GridObj gridObj)

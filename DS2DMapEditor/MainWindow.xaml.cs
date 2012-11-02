@@ -596,7 +596,7 @@ namespace RogueCastleEditor
                     {
                         EnemyMapObject enemy = obj as EnemyMapObject;
                         writer.WriteAttributeString("Procedural", enemy.Procedural.ToString());
-                        writer.WriteAttributeString("EnemyType", enemy.Type);
+                        writer.WriteAttributeString("EnemyType", enemy.Type.ToString());
                         writer.WriteAttributeString("Difficulty", enemy.Difficulty.ToString());
                         writer.WriteAttributeString("InitialDelay", enemy.InitialLogicDelay.ToString());
                     }
@@ -826,7 +826,11 @@ namespace RogueCastleEditor
                                         if (reader.MoveToAttribute("Procedural"))
                                             enemy.Procedural = bool.Parse(reader.Value);
                                         if (reader.MoveToAttribute("EnemyType"))
-                                            enemy.Type = reader.Value;
+                                        {
+                                            //byte fixedValue = FixEnemyTypesString(reader.Value);
+                                            //enemy.Type = fixedValue;
+                                            enemy.Type = byte.Parse(reader.Value);
+                                        }
                                         if (reader.MoveToAttribute("Difficulty"))
                                         {
                                             string enumValue = reader.Value;
@@ -1080,6 +1084,56 @@ namespace RogueCastleEditor
                 else if (value == false && this.Title.IndexOf("*") != -1)
                     this.ChangeTitle(this.Title.Substring(0, this.Title.Length - 1));
             }
+        }
+
+        public static byte FixEnemyTypesString(string value)
+        {
+            switch (value)
+            {
+                case ("EnemyObj_BallAndChain"):
+                    return 1;
+                case ("EnemyObj_Blob"):
+                    return 2;
+                case ("EnemyObj_BouncySpike"):
+                    return 3;
+                case ("EnemyObj_Eagle"):
+                    return 4;
+                case ("EnemyObj_EarthWizard"):
+                    return 5;
+                case ("EnemyObj_Eyeball"):
+                    return 6;
+                case ("EnemyObj_Fairy"):
+                    return 7;
+                case ("EnemyObj_Fireball"):
+                    return 8;
+                case ("EnemyObj_FireWizard"):
+                    return 9;
+                case ("EnemyObj_Horse"):
+                    return 10;
+                case ("EnemyObj_IceWizard"):
+                    return 11;
+                case ("EnemyObj_Knight"):
+                    return 12;
+                case ("EnemyObj_Ninja"):
+                    return 13;
+                case ("EnemyObj_ShieldKnight"):
+                    return 14;
+                case ("EnemyObj_Skeleton"):
+                    return 15;
+                case ("EnemyObj_SwordKnight"):
+                    return 16;
+                case ("EnemyObj_Turret"):
+                    return 17;
+                case ("EnemyObj_Wall"):
+                    return 18;
+                case ("EnemyObj_Wolf"):
+                    return 19;
+                case ("EnemyObj_Zombie"):
+                    return 20;
+                case ("EnemyObj_SpikeTrap"):
+                    return 21;
+            }
+            return 0;
         }
     }
 }

@@ -54,7 +54,7 @@ namespace RogueCastleEditor
                             if (reader.Name == "EnemyObj")
                             {
                                 reader.MoveToAttribute("Type");
-                                string type = reader.Value;
+                                byte type = byte.Parse(reader.Value);
                                 reader.MoveToAttribute("SpriteName");
                                 string spriteName = reader.Value;
 
@@ -168,7 +168,7 @@ namespace RogueCastleEditor
 
         private struct EnemyData
         {
-            public string Type;
+            public byte Type;
             public string SpriteName;
             public Vector2 BasicScale;
             public Vector2 AdvancedScale;

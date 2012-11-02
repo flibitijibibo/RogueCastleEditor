@@ -11,7 +11,7 @@ namespace RogueCastleEditor
     {
         public bool LockedToLedge = false;
         public EnemyDifficulty Difficulty = EnemyDifficulty.BASIC;
-        public string Type = "";
+        public byte Type = 0;
         public bool Procedural { get; set; }
 
         public Vector2 BasicScale = new Vector2(1,1);

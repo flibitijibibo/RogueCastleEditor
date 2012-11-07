@@ -41,6 +41,7 @@ namespace RogueCastleEditor
         private List<Vector2> m_clipboardPositions;
         private bool m_clipboardKeyPressed = false;
         private bool m_ctrlHeld;
+        private bool m_zHeld;
         
         // Variables needed for Undomanager when moving objects via arrow keys.
         private List<Vector2> m_objStartPos;
@@ -237,6 +238,9 @@ namespace RogueCastleEditor
             if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
                 m_ctrlHeld = true;
 
+            if (e.Key == Key.Z)
+                m_zHeld = true;
+
             if (m_ctrlHeld == true && m_clipboardKeyPressed == false)
             {
                 CtrlKeyHandler(e);
@@ -273,6 +277,9 @@ namespace RogueCastleEditor
             if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
                 m_ctrlHeld = false;
 
+            if (e.Key == Key.Z)
+                m_zHeld = false;
+
             if (e.Key == Key.Left || e.Key == Key.Right || e.Key == Key.Up || e.Key == Key.Down)
             {
                 m_arrowKeyHeld = false;
@@ -305,7 +312,7 @@ namespace RogueCastleEditor
             else if (e.Key == Key.Down)
                 moveAmountY = 1;
 
-            if (SnapToGrid == true)
+            if (SnapToGrid == true && m_zHeld == false)
             {
                 moveAmountX *= m_grid.ColDistance;
                 moveAmountY *= m_grid.RowDistance;

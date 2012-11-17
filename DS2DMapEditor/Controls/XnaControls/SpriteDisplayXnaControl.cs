@@ -95,7 +95,7 @@ namespace RogueCastleEditor
                         m_spriteList.Add(newSprite);
                         newSprite.PlayAnimation();
 
-                        if (m_posCountX >= 3)
+                        if (m_posCountX >= 7)
                         {
                             m_posCountX = 0;
                             m_posCountY++;

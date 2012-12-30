@@ -37,17 +37,27 @@ namespace RogueCastleEditor
                         Consts.COLLHULL_BORDER_COLOR * this.Opacity);
         }
 
-        public override object Clone()
+        protected override GameObj CreateCloneInstance()
         {
-            PlayerStartObj clonedSprite = new PlayerStartObj();
-
-            clonedSprite.Name = this.Name;
-            clonedSprite.Position = this.Position;
-            clonedSprite.Scale = this.Scale;
-            clonedSprite.Rotation = this.Rotation;
-            clonedSprite.Flip = this.Flip;
-
-            return clonedSprite;
+            return new PlayerStartObj();
         }
+
+        protected override void FillCloneInstance(object obj)
+        {
+            base.FillCloneInstance(obj);
+        }
+
+        //public override object Clone()
+        //{
+        //    PlayerStartObj clonedSprite = new PlayerStartObj();
+
+        //    clonedSprite.Name = this.Name;
+        //    clonedSprite.Position = this.Position;
+        //    clonedSprite.Scale = this.Scale;
+        //    clonedSprite.Rotation = this.Rotation;
+        //    clonedSprite.Flip = this.Flip;
+
+        //    return clonedSprite;
+        //}
     }
 }

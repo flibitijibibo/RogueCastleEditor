@@ -28,36 +28,62 @@ namespace RogueCastleEditor
             Procedural = false;
         }
 
-        public override object Clone()
+        protected override GameObj CreateCloneInstance()
         {
-            EnemyMapObject clonedObj = new EnemyMapObject(_spriteName);
-            clonedObj._objectList.Clear();
-
-            foreach (GameObj obj in _objectList)
-            {
-                clonedObj.AddChild(obj.Clone() as GameObj);
-            }
-            clonedObj.Name = this.Name;
-            clonedObj.Position = this.Position;
-            clonedObj.Scale = this.Scale;
-            clonedObj.Rotation = this.Rotation;
-            clonedObj.Flip = this.Flip;
-            clonedObj.SpriteName = this.SpriteName;
-            clonedObj.LockedToLedge = this.LockedToLedge;
-            clonedObj.Difficulty = this.Difficulty;
-            clonedObj.Type = this.Type;
-            clonedObj.Tag = this.Tag;
-            clonedObj.InitialLogicDelay = this.InitialLogicDelay;
-            clonedObj.Anchor = this.Anchor;
-
-            clonedObj.BasicScale = this.BasicScale;
-            clonedObj.AdvancedScale = this.AdvancedScale;
-            clonedObj.ExpertScale = this.ExpertScale;
-            clonedObj.MinibossScale = this.MinibossScale;
-
-            clonedObj.Procedural = this.Procedural;
-
-            return clonedObj;
+            return new EnemyMapObject(_spriteName);
         }
+
+        protected override void FillCloneInstance(object obj)
+        {
+            base.FillCloneInstance(obj);
+
+            EnemyMapObject clone = obj as EnemyMapObject;
+
+            foreach (GameObj gameObj in _objectList)
+                clone.AddChild(gameObj.Clone() as GameObj);
+
+            clone.LockedToLedge = this.LockedToLedge;
+            clone.Difficulty = this.Difficulty;
+            clone.InitialLogicDelay = this.InitialLogicDelay;
+
+            clone.BasicScale = this.BasicScale;
+            clone.AdvancedScale = this.AdvancedScale;
+            clone.ExpertScale = this.ExpertScale;
+            clone.MinibossScale = this.MinibossScale;
+
+            clone.Procedural = this.Procedural;
+        }
+
+        //public override object Clone()
+        //{
+        //    EnemyMapObject clonedObj = new EnemyMapObject(_spriteName);
+        //    clonedObj._objectList.Clear();
+
+        //    foreach (GameObj obj in _objectList)
+        //    {
+        //        clonedObj.AddChild(obj.Clone() as GameObj);
+        //    }
+        //    clonedObj.Name = this.Name;
+        //    clonedObj.Position = this.Position;
+        //    clonedObj.Scale = this.Scale;
+        //    clonedObj.Rotation = this.Rotation;
+        //    clonedObj.Flip = this.Flip;
+        //    clonedObj.SpriteName = this.SpriteName;
+        //    clonedObj.LockedToLedge = this.LockedToLedge;
+        //    clonedObj.Difficulty = this.Difficulty;
+        //    clonedObj.Type = this.Type;
+        //    clonedObj.Tag = this.Tag;
+        //    clonedObj.InitialLogicDelay = this.InitialLogicDelay;
+        //    clonedObj.Anchor = this.Anchor;
+
+        //    clonedObj.BasicScale = this.BasicScale;
+        //    clonedObj.AdvancedScale = this.AdvancedScale;
+        //    clonedObj.ExpertScale = this.ExpertScale;
+        //    clonedObj.MinibossScale = this.MinibossScale;
+
+        //    clonedObj.Procedural = this.Procedural;
+
+        //    return clonedObj;
+        //}
     }
 }

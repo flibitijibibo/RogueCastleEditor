@@ -168,14 +168,24 @@ namespace RogueCastleEditor
             }
         }
 
-        public override object Clone()
+        protected override GameObj CreateCloneInstance()
         {
-            RoomObj collHullToClone = new RoomObj((int)this.X, (int)this.Y, _width, _height, m_mapDisplayRef, m_mainWindowRef);
-            collHullToClone.Name = this.Name;
-            collHullToClone.Scale = this.Scale;
-            collHullToClone.Position = this.Position;
-            return collHullToClone;
+            return new RoomObj((int)this.X, (int)this.Y, _width, _height, m_mapDisplayRef, m_mainWindowRef);
         }
+
+        protected override void FillCloneInstance(object obj)
+        {
+            base.FillCloneInstance(obj);
+        }
+
+        //public override object Clone()
+        //{
+        //    RoomObj collHullToClone = new RoomObj((int)this.X, (int)this.Y, _width, _height, m_mapDisplayRef, m_mainWindowRef);
+        //    collHullToClone.Name = this.Name;
+        //    collHullToClone.Scale = this.Scale;
+        //    collHullToClone.Position = this.Position;
+        //    return collHullToClone;
+        //}
 
         public override void Dispose()
         {

@@ -27,28 +27,47 @@ namespace RogueCastleEditor
             IsWeighted = false;
         }
 
-        public override object Clone()
+
+        protected override GameObj CreateCloneInstance()
         {
-            MapObjContainer clonedObj = new MapObjContainer();
-
-            foreach (GameObj obj in _objectList)
-            {
-                clonedObj.AddChild(obj.Clone() as GameObj);
-            }
-            clonedObj.Name = this.Name;
-            clonedObj.Position = this.Position;
-            clonedObj.Scale = this.Scale;
-            clonedObj.Rotation = this.Rotation;
-            clonedObj.Flip = this.Flip;
-            clonedObj.SpriteName = this.SpriteName;
-            clonedObj.Anchor = this.Anchor;
-            clonedObj.LevelType = this.LevelType;
-            clonedObj.Breakable = this.Breakable;
-            clonedObj.IsCollidable = this.IsCollidable;
-            clonedObj.IsWeighted = this.IsWeighted;
-            clonedObj.OnBGLayer = this.OnBGLayer;
-
-            return clonedObj;
+            return new MapObjContainer();
         }
+
+        protected override void FillCloneInstance(object obj)
+        {
+            base.FillCloneInstance(obj);
+
+            MapObjContainer clone = obj as MapObjContainer;
+            foreach (GameObj gameObj in _objectList)
+                clone.AddChild(gameObj.Clone() as GameObj);
+            
+            clone.LevelType = this.LevelType;
+            clone.OnBGLayer = this.OnBGLayer;
+            clone.Breakable = this.Breakable;
+        }
+
+        //public override object Clone()
+        //{
+        //    MapObjContainer clonedObj = new MapObjContainer();
+
+        //    foreach (GameObj obj in _objectList)
+        //    {
+        //        clonedObj.AddChild(obj.Clone() as GameObj);
+        //    }
+        //    clonedObj.Name = this.Name;
+        //    clonedObj.Position = this.Position;
+        //    clonedObj.Scale = this.Scale;
+        //    clonedObj.Rotation = this.Rotation;
+        //    clonedObj.Flip = this.Flip;
+        //    clonedObj.SpriteName = this.SpriteName;
+        //    clonedObj.Anchor = this.Anchor;
+        //    clonedObj.LevelType = this.LevelType;
+        //    clonedObj.Breakable = this.Breakable;
+        //    clonedObj.IsCollidable = this.IsCollidable;
+        //    clonedObj.IsWeighted = this.IsWeighted;
+        //    clonedObj.OnBGLayer = this.OnBGLayer;
+
+        //    return clonedObj;
+        //}
     }
 }

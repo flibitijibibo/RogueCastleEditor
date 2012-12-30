@@ -25,20 +25,35 @@ namespace RogueCastleEditor
             IsWeighted = false;
         }
 
-        public override object Clone()
+        protected override GameObj CreateCloneInstance()
         {
-            MapSpriteObj clonedSprite = new MapSpriteObj(_spriteName);
-            
-            clonedSprite.Name = this.Name;
-            clonedSprite.Position = this.Position;
-            clonedSprite.Scale = this.Scale;
-            clonedSprite.Rotation = this.Rotation;
-            clonedSprite.Flip = this.Flip;
-            clonedSprite.LevelType = this.LevelType;
-            clonedSprite.OnBGLayer = this.OnBGLayer;
-
-            return clonedSprite;
+            return new MapSpriteObj(_spriteName);
         }
+
+        protected override void FillCloneInstance(object obj)
+        {
+            base.FillCloneInstance(obj);
+
+            MapSpriteObj clone = obj as MapSpriteObj;
+            clone.LevelType = this.LevelType;
+            clone.OnBGLayer = this.OnBGLayer;
+        }
+
+
+        //public override object Clone()
+        //{
+        //    MapSpriteObj clonedSprite = new MapSpriteObj(_spriteName);
+            
+        //    clonedSprite.Name = this.Name;
+        //    clonedSprite.Position = this.Position;
+        //    clonedSprite.Scale = this.Scale;
+        //    clonedSprite.Rotation = this.Rotation;
+        //    clonedSprite.Flip = this.Flip;
+        //    clonedSprite.LevelType = this.LevelType;
+        //    clonedSprite.OnBGLayer = this.OnBGLayer;
+
+        //    return clonedSprite;
+        //}
 
     }
 }

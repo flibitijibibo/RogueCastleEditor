@@ -442,6 +442,11 @@ namespace RogueCastleEditor
                 for (int i = 0; i < m_clipboard.Count; i++)
                 {
                     GameObj objToCopy = m_clipboard[i].Clone() as GameObj;
+
+                    IPhysicsObj physicsObj = objToCopy as IPhysicsObj;
+                    if (physicsObj != null && physicsObj.PhysicsMngr != null && physicsObj.PhysicsMngr.ObjectList.Contains(physicsObj))
+                        physicsObj.PhysicsMngr.RemoveObject(physicsObj); // The object must be removed from the physics manager before it can be pasted (since pasting it adds it to the physics manager).
+
                     objToCopy.X = m_camera.X + m_clipboardPositions[i].X;
                     objToCopy.Y = m_camera.Y + m_clipboardPositions[i].Y;
                     //objToCopy.X += m_camera.X;

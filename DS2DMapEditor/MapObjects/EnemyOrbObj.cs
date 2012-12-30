@@ -43,21 +43,37 @@ namespace RogueCastleEditor
                 base.Draw(camera);
         }
 
-        public override object Clone()
+        protected override GameObj CreateCloneInstance()
         {
-            EnemyOrbObj clonedSprite = new EnemyOrbObj();
-
-            clonedSprite.Name = this.Name;
-            clonedSprite.Position = this.Position;
-            clonedSprite.Scale = this.Scale;
-            clonedSprite.Rotation = this.Rotation;
-            clonedSprite.Flip = this.Flip;
-
-            clonedSprite.OrbType = this.OrbType;
-            clonedSprite.LevelType = this.LevelType;
-            clonedSprite.ForceFlying = this.ForceFlying;
-            clonedSprite.IsWaypoint = this.IsWaypoint;
-            return clonedSprite;
+            return new EnemyOrbObj();
         }
+
+        protected override void FillCloneInstance(object obj)
+        {
+            base.FillCloneInstance(obj);
+
+            EnemyOrbObj clone = obj as EnemyOrbObj;
+            clone.OrbType = this.OrbType;
+            clone.LevelType = this.LevelType;
+            clone.ForceFlying = this.ForceFlying;
+            clone.IsWaypoint = this.IsWaypoint;
+        }
+
+        //public override object Clone()
+        //{
+        //    EnemyOrbObj clonedSprite = new EnemyOrbObj();
+
+        //    clonedSprite.Name = this.Name;
+        //    clonedSprite.Position = this.Position;
+        //    clonedSprite.Scale = this.Scale;
+        //    clonedSprite.Rotation = this.Rotation;
+        //    clonedSprite.Flip = this.Flip;
+
+        //    clonedSprite.OrbType = this.OrbType;
+        //    clonedSprite.LevelType = this.LevelType;
+        //    clonedSprite.ForceFlying = this.ForceFlying;
+        //    clonedSprite.IsWaypoint = this.IsWaypoint;
+        //    return clonedSprite;
+        //}
     }
 }

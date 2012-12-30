@@ -18,11 +18,24 @@ namespace RogueCastleEditor
             m_triggerList = new List<ITriggerableObj>();
         }
 
-        public override object Clone()
+        protected override GameObj CreateCloneInstance()
         {
-            MapTriggerObj triggerObj = new MapTriggerObj(Width, Height);
-            triggerObj.LevelType = this.LevelType;
-            return triggerObj;
+            return new MapTriggerObj(Width, Height);
         }
+
+        protected override void FillCloneInstance(object obj)
+        {
+            base.FillCloneInstance(obj);
+
+            MapTriggerObj clone = obj as MapTriggerObj;
+            clone.LevelType = this.LevelType;
+        }
+
+        //public override object Clone()
+        //{
+        //    MapTriggerObj triggerObj = new MapTriggerObj(Width, Height);
+        //    triggerObj.LevelType = this.LevelType;
+        //    return triggerObj;
+        //}
     }
 }

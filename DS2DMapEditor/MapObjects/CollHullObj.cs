@@ -143,31 +143,56 @@ namespace RogueCastleEditor
             }
         }
 
-        public override object Clone()
+        protected override GameObj CreateCloneInstance()
         {
-            CollHullObj collHullToClone = new CollHullObj((int)this.X, (int)this.Y, _width, _height);
-            collHullToClone.Name = this.Name;
-            collHullToClone.Scale = this.Scale;
-            collHullToClone.Position = this.Position;
-
-            collHullToClone.CollidesBottom = this.CollidesBottom;
-            collHullToClone.CollidesTop= this.CollidesTop;
-            collHullToClone.CollidesLeft= this.CollidesLeft;
-            collHullToClone.CollidesRight= this.CollidesRight;
-
-            collHullToClone.IsTrigger = this.IsTrigger;
-            collHullToClone.Rotation = this.Rotation;
-            collHullToClone.IsChest = this.IsChest;
-            collHullToClone.IsHazard = this.IsHazard;
-            collHullToClone.IsBorder = this.IsBorder;
-
-            collHullToClone.IsBossDoor = this.IsBossDoor;
-            collHullToClone.LevelType = this.LevelType;
-
-            collHullToClone.IsFairyChest = this.IsFairyChest;
-
-            return collHullToClone;
+            return new CollHullObj((int)this.X, (int)this.Y, this.Width, this.Height);
         }
+
+        protected override void FillCloneInstance(object obj)
+        {
+            base.FillCloneInstance(obj);
+
+            CollHullObj clone = obj as CollHullObj;
+            clone.IsChest = this.IsChest;
+            clone.IsFairyChest = this.IsFairyChest;
+            clone.IsTrigger = this.IsTrigger;
+            clone.IsHazard = this.IsHazard;
+            clone.IsBorder = this.IsBorder;
+            clone.IsBossDoor = this.IsBossDoor;
+
+            clone.CollidesTop = this.CollidesTop;
+            clone.CollidesBottom = this.CollidesBottom;
+            clone.CollidesLeft = this.CollidesLeft;
+            clone.CollidesRight = this.CollidesRight;
+
+            clone.LevelType = this.LevelType;
+        }
+
+        //public override object Clone()
+        //{
+        //    CollHullObj collHullToClone = new CollHullObj((int)this.X, (int)this.Y, _width, _height);
+        //    collHullToClone.Name = this.Name;
+        //    collHullToClone.Scale = this.Scale;
+        //    collHullToClone.Position = this.Position;
+
+        //    collHullToClone.CollidesBottom = this.CollidesBottom;
+        //    collHullToClone.CollidesTop= this.CollidesTop;
+        //    collHullToClone.CollidesLeft= this.CollidesLeft;
+        //    collHullToClone.CollidesRight= this.CollidesRight;
+
+        //    collHullToClone.IsTrigger = this.IsTrigger;
+        //    collHullToClone.Rotation = this.Rotation;
+        //    collHullToClone.IsChest = this.IsChest;
+        //    collHullToClone.IsHazard = this.IsHazard;
+        //    collHullToClone.IsBorder = this.IsBorder;
+
+        //    collHullToClone.IsBossDoor = this.IsBossDoor;
+        //    collHullToClone.LevelType = this.LevelType;
+
+        //    collHullToClone.IsFairyChest = this.IsFairyChest;
+
+        //    return collHullToClone;
+        //}
 
         public Rectangle HullRect
         {

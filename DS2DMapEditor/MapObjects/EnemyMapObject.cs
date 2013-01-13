@@ -30,7 +30,8 @@ namespace RogueCastleEditor
 
         protected override GameObj CreateCloneInstance()
         {
-            return new EnemyMapObject(_spriteName);
+            EnemyMapObject clone = new EnemyMapObject(_spriteName);
+            return clone;
         }
 
         protected override void FillCloneInstance(object obj)
@@ -38,10 +39,6 @@ namespace RogueCastleEditor
             base.FillCloneInstance(obj);
 
             EnemyMapObject clone = obj as EnemyMapObject;
-
-            foreach (GameObj gameObj in _objectList)
-                clone.AddChild(gameObj.Clone() as GameObj);
-
             clone.LockedToLedge = this.LockedToLedge;
             clone.Difficulty = this.Difficulty;
             clone.InitialLogicDelay = this.InitialLogicDelay;
@@ -50,7 +47,7 @@ namespace RogueCastleEditor
             clone.AdvancedScale = this.AdvancedScale;
             clone.ExpertScale = this.ExpertScale;
             clone.MinibossScale = this.MinibossScale;
-
+            clone.Type = this.Type;
             clone.Procedural = this.Procedural;
         }
 

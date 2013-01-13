@@ -30,7 +30,16 @@ namespace RogueCastleEditor
 
         protected override GameObj CreateCloneInstance()
         {
-            return new MapObjContainer();
+            if (_spriteName != "")
+                return new MapObjContainer(_spriteName);
+            else
+            {
+                MapObjContainer clone = new MapObjContainer();
+
+                foreach (GameObj obj in _objectList)
+                    clone.AddChild(obj.Clone() as GameObj);
+                return clone;
+            }
         }
 
         protected override void FillCloneInstance(object obj)
@@ -38,8 +47,6 @@ namespace RogueCastleEditor
             base.FillCloneInstance(obj);
 
             MapObjContainer clone = obj as MapObjContainer;
-            foreach (GameObj gameObj in _objectList)
-                clone.AddChild(gameObj.Clone() as GameObj);
             
             clone.LevelType = this.LevelType;
             clone.OnBGLayer = this.OnBGLayer;

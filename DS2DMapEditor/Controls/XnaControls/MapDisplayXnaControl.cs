@@ -47,6 +47,10 @@ namespace RogueCastleEditor
         private List<Vector2> m_objStartPos;
         private bool m_arrowKeyHeld = false;
 
+        // Variables needed for moving object layer.
+        private bool m_minusHeld = false;
+        private bool m_plusHeld = false;
+
         // Grid properties.
         private GridObj m_grid;
         public bool GridVisible { get; set; }
@@ -259,6 +263,54 @@ namespace RogueCastleEditor
                 }
                 ArrowKeysHandler(e);
             }
+
+            if (SelectedObjects.Count > 0 && e.Key == Key.OemMinus)
+            {
+                if (m_minusHeld == false)
+                {
+                    m_minusHeld = true;
+                    ObservableCollection<GameObj> activeLayer = ControllerRef.GlobalLayerList[ControllerRef.SelectedLayerIndex];
+                    List<GameObj> selectedObjList = new List<GameObj>();
+                    selectedObjList.AddRange(SelectedObjects);
+
+                    // Sort by descending. Lower index first.
+                    selectedObjList.Sort(delegate(GameObj obj1, GameObj obj2) { return activeLayer.IndexOf(obj1).CompareTo(activeLayer.IndexOf(obj2));});
+
+                    foreach (GameObj obj in selectedObjList)
+                    {
+                        int index = activeLayer.IndexOf(obj);
+                        if (index <= 0) // Do not sort the objects if one is already at the start of the list.
+                            break;
+
+                        activeLayer.Remove(obj);
+                        activeLayer.Insert(index - 1, obj);
+                    }
+                }
+            }
+
+            if (SelectedObjects.Count > 0 && e.Key == Key.OemPlus)
+            {
+                if (m_plusHeld == false)
+                {
+                    m_plusHeld = true;
+                    ObservableCollection<GameObj> activeLayer = ControllerRef.GlobalLayerList[ControllerRef.SelectedLayerIndex];
+                    List<GameObj> selectedObjList = new List<GameObj>();
+                    selectedObjList.AddRange(SelectedObjects);
+
+                    // Sort by ascending. Higher index first.
+                    selectedObjList.Sort(delegate(GameObj obj1, GameObj obj2) { return activeLayer.IndexOf(obj2).CompareTo(activeLayer.IndexOf(obj1)); });
+
+                    foreach (GameObj obj in selectedObjList)
+                    {
+                        int index = activeLayer.IndexOf(obj);
+                        if (index >= activeLayer.Count - 1) // Do not sort the objects if one is already at the end of the list.
+                            break;
+
+                        activeLayer.Remove(obj);
+                        activeLayer.Insert(index + 1, obj);
+                    }
+                }
+            }
         }
 
         protected override void OnKeyUp(KeyEventArgs e)
@@ -276,6 +328,12 @@ namespace RogueCastleEditor
 
             if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
                 m_ctrlHeld = false;
+
+            if (e.Key == Key.OemMinus)
+                m_minusHeld = false;
+
+            if (e.Key == Key.OemPlus)
+                m_plusHeld = false;
 
             if (e.Key == Key.Z)
                 m_zHeld = false;

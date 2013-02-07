@@ -429,7 +429,10 @@ namespace RogueCastleEditor
                 // Do not copy the player start location.
                 if (!(obj is PlayerStartObj))
                 {
-                    m_clipboard.Add(obj.Clone() as GameObj);
+                    GameObj clone = obj.Clone() as GameObj;
+                    if (clone is IPhysicsObj)
+                        m_physicsManager.RemoveObject(clone as IPhysicsObj);
+                    m_clipboard.Add(clone);
                     m_clipboardPositions.Add(new Vector2(obj.X - SelectedObjectsRect.Center.X, obj.Y - SelectedObjectsRect.Center.Y));
                 }
             }

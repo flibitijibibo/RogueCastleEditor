@@ -41,7 +41,7 @@ namespace RogueCastleEditor
         protected virtual void loadContent(object sender, GraphicsDeviceEventArgs e)
         {
             GraphicsDevice = e.GraphicsDevice;
-            m_camera = new Camera2D(GraphicsDevice);
+            m_camera = new Camera2D(GraphicsDevice, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
             // Creating a generic texture for use.
             m_genericTexture = new Texture2D(GraphicsDevice, 1, 1);

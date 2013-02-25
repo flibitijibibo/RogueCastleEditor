@@ -29,6 +29,10 @@ namespace RogueCastleEditor
                 TextureColor = Color.Blue;
             else if (OrbType == 2)
                 TextureColor = Color.LightSeaGreen;
+            else if (OrbType == 3)
+                TextureColor = Color.White;
+            else if (OrbType == 4)
+                TextureColor = Color.Black;
             else
                 TextureColor = Color.Yellow;
 

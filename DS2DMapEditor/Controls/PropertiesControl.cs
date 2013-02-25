@@ -260,12 +260,28 @@ namespace RogueCastleEditor
 
                 this.Children.Add(orbRad2);
                 TextBlock orb3 = new TextBlock();
-                orb3.Text = "Yellow Orb (Boss Orb)";
+                orb3.Text = "White Orb";
                 this.Children.Add(orb3);
                 RadioButton orbRad3 = new RadioButton();
                 orbRad3.GroupName = "orbType";
-                orbRad3.Name = "yellowOrb";
+                orbRad3.Name = "whiteOrb";
+
                 this.Children.Add(orbRad3);
+                TextBlock orb4 = new TextBlock();
+                orb4.Text = "Black Orb";
+                this.Children.Add(orb4);
+                RadioButton orbRad4 = new RadioButton();
+                orbRad4.GroupName = "orbType";
+                orbRad4.Name = "blackOrb";
+
+                this.Children.Add(orbRad4);
+                TextBlock orb5 = new TextBlock();
+                orb5.Text = "Yellow Orb (Boss Orb)";
+                this.Children.Add(orb5);
+                RadioButton orbRad5 = new RadioButton();
+                orbRad5.GroupName = "orbType";
+                orbRad5.Name = "yellowOrb";
+                this.Children.Add(orbRad5);
 
                 if ((obj as EnemyOrbObj).OrbType == 0)
                     orbRad0.IsChecked = true;
@@ -273,13 +289,19 @@ namespace RogueCastleEditor
                     orbRad1.IsChecked = true;
                 else if ((obj as EnemyOrbObj).OrbType == 2)
                     orbRad2.IsChecked = true;
-                else
+                else if ((obj as EnemyOrbObj).OrbType == 3)
                     orbRad3.IsChecked = true;
+                else if ((obj as EnemyOrbObj).OrbType == 4)
+                    orbRad4.IsChecked = true;
+                else
+                    orbRad5.IsChecked = true;
 
                 orbRad0.Checked += RadioButtonEventHandler;
                 orbRad1.Checked += RadioButtonEventHandler;
                 orbRad2.Checked += RadioButtonEventHandler;
                 orbRad3.Checked += RadioButtonEventHandler;
+                orbRad4.Checked += RadioButtonEventHandler;
+                orbRad5.Checked += RadioButtonEventHandler;
             }
 
             if (obj is MapObjContainer)
@@ -699,8 +721,14 @@ namespace RogueCastleEditor
                 case ("greenOrb"):
                     (m_selectedObj as EnemyOrbObj).OrbType = 2;
                     break;
-                case ("yellowOrb"):
+                case ("whiteOrb"):
                     (m_selectedObj as EnemyOrbObj).OrbType = 3;
+                    break;
+                case ("blackOrb"):
+                    (m_selectedObj as EnemyOrbObj).OrbType = 4;
+                    break;
+                case ("yellowOrb"):
+                    (m_selectedObj as EnemyOrbObj).OrbType = 5;
                     break;
             }
         }

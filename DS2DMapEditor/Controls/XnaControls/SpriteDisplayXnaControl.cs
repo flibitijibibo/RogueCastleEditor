@@ -134,8 +134,8 @@ namespace RogueCastleEditor
                     Vector2 storedScale = obj.Scale;
                     obj.Scale = new Vector2(1, 1); // Set object scale back to 1 before cloning.
                     GameObj objToClone = obj.Clone() as GameObj;
-                    objToClone.ScaleX = 1;
-                    objToClone.ScaleY = 1;
+                    objToClone.ScaleX = 2;
+                    objToClone.ScaleY = 2;
                     ControllerRef.AddSprite(objToClone);
                     obj.Scale = storedScale;
                 }

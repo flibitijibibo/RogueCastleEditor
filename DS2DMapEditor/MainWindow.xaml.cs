@@ -736,15 +736,15 @@ namespace RogueCastleEditor
                     openDialog.Title = "Open File...";
                     if (openDialog.ShowDialog() == true)
                     {
-                        try
+                        //try
                         {
                             LoadXMLFile(openDialog.FileName);
                             ChangeTitle("Rogue Castle Editor - " + EditorConfig.SaveDirectory);
                             this.ChangeMade = false;
                         }
-                        catch (Exception ex)
+                        //catch (Exception ex)
                         {
-                            MessageBox.Show("ERROR: Could not load file. Original error: " + ex.Message);
+                          //  MessageBox.Show("ERROR: Could not load file. Original error: " + ex.Message);
                         }
                     }
                 }

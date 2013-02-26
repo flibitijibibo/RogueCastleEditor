@@ -138,6 +138,23 @@ namespace RogueCastleEditor
                     objToClone.ScaleY = 2;
                     ControllerRef.AddSprite(objToClone);
                     obj.Scale = storedScale;
+
+                    bool hasBodyHitbox = false;
+                    MapObjContainer objContainer = objToClone as MapObjContainer;
+                    if (objContainer != null)
+                    {
+                        foreach (CollisionBox box in objContainer.CollisionBoxes)
+                        {
+                            if (box.Type == DS2DEngine.Consts.BODY_HITBOX)
+                            {
+                                hasBodyHitbox = true;
+                                break;
+                            }
+                        }
+
+                        if (hasBodyHitbox == true)
+                            objContainer.Breakable = true;
+                    }
                 }
             }
         }

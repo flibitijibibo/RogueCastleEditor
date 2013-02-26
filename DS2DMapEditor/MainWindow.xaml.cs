@@ -131,6 +131,12 @@ namespace RogueCastleEditor
 
             if (e.Key == Key.F5)
                 LoadLevel();
+            else if (e.Key == Key.F6)
+                LoadLevel("-t");
+            else if (e.Key == Key.F7)
+                LoadLevel("-d");
+            else if (e.Key == Key.F8)
+                LoadLevel("-g");
 
             // Special key handling for saving.
             if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
@@ -369,7 +375,7 @@ namespace RogueCastleEditor
             this.Title = newTitle;
         }
 
-        public void LoadLevel()
+        public void LoadLevel(string levelTypeArg = "")
         {
             if (EditorConfig.ExecutableDirectory == "")
             {
@@ -400,7 +406,7 @@ namespace RogueCastleEditor
                 ProcessStartInfo startInfo = new ProcessStartInfo();
                 startInfo.FileName = EditorConfig.ExecutableDirectory.Substring(lastSlashIndex);
                 startInfo.WorkingDirectory = EditorConfig.ExecutableDirectory.Substring(0, lastSlashIndex);
-                startInfo.Arguments = tempFilePath;
+                startInfo.Arguments = tempFilePath + levelTypeArg;
                 try
                 {
                     using (Process exeProcess = Process.Start(startInfo))

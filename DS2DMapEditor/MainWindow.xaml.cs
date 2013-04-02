@@ -582,7 +582,10 @@ namespace RogueCastleEditor
                     }
                     else if (obj is MapSpriteObj)
                     {
-                        type = "SpriteObj";
+                        if ((obj as MapSpriteObj).IsCollidable == true || (obj as MapSpriteObj).IsWeighted == true)
+                            type = "PhysicsObj";
+                        else
+                            type = "SpriteObj";
                     }
                     else if (obj is MapObjContainer)
                     {
@@ -639,10 +642,15 @@ namespace RogueCastleEditor
                         writer.WriteAttributeString("IsWaypoint", (obj as EnemyOrbObj).IsWaypoint.ToString());
                     }
 
-                    if (type == "SpriteObj")
+                    if (type == "SpriteObj" || type == "PhysicsObj")
                     {
                         writer.WriteAttributeString("SpriteName", (obj as MapSpriteObj).SpriteName);
                         writer.WriteAttributeString("BGLayer", (obj as MapSpriteObj).OnBGLayer.ToString());
+                        if (type == "PhysicsObj")
+                        {
+                            writer.WriteAttributeString("Weighted", (obj as MapSpriteObj).IsWeighted.ToString());
+                            writer.WriteAttributeString("Collidable", (obj as MapSpriteObj).IsCollidable.ToString());
+                        }
                     }
 
                     if (type == "PhysicsObjContainer" || type == "ObjContainer")
@@ -895,9 +903,9 @@ namespace RogueCastleEditor
                                 case ("PhysicsObj"):
                                 case ("SpriteObj"):
                                     newObj = new MapSpriteObj(spriteName);
-                                    if (reader.MoveToAttribute("IsCollidable"))
+                                    if (reader.MoveToAttribute("Collidable"))
                                         (newObj as IPhysicsObj).IsCollidable = bool.Parse(reader.Value);
-                                    if (reader.MoveToAttribute("IsWeighted"))
+                                    if (reader.MoveToAttribute("Weighted"))
                                         (newObj as IPhysicsObj).IsWeighted = bool.Parse(reader.Value);
                                     break;
                                 case ("PlayerStartObj"):

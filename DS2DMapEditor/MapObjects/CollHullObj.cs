@@ -98,7 +98,7 @@ namespace RogueCastleEditor
 
             // Top Border
             camera.Draw(Consts.GenericTexture, new Rectangle(hullRect.X, hullRect.Y, hullRect.Width, Consts.SELECTION_BORDERWIDTH), null,
-                        Consts.COLLHULL_BORDER_COLOR * this.Opacity, MathHelper.ToRadians(Rotation), Vector2.Zero, SpriteEffects.None, 0);
+                        Color.Black * this.Opacity, MathHelper.ToRadians(Rotation), Vector2.Zero, SpriteEffects.None, 0);
             Vector2 rotatedPoint = CDGMath.RotatedPoint(new Vector2(0, hullRect.Height), Rotation);
             // Bottom Border
             camera.Draw(Consts.GenericTexture, new Rectangle((int)(hullRect.X + rotatedPoint.X), (int)(hullRect.Y + rotatedPoint.Y - Consts.SELECTION_BORDERWIDTH), hullRect.Width, Consts.SELECTION_BORDERWIDTH), null,

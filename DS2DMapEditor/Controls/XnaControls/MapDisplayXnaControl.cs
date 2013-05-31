@@ -59,6 +59,8 @@ namespace RogueCastleEditor
         // Selection tool properties.
         public bool SelectCollHulls { get; set; }
         public bool SelectSpriteObjs { get; set; }
+        public bool DisplayCollHulls { get; set; }
+        public bool DisplaySpriteObjs { get; set; }
 
         public static SpriteFont Font;
 
@@ -77,6 +79,8 @@ namespace RogueCastleEditor
             m_objStartPos = new List<Vector2>();
             SelectCollHulls = true;
             SelectSpriteObjs = true;
+            DisplayCollHulls = true;
+            DisplaySpriteObjs = true;
         }
 
         /// <summary>
@@ -170,16 +174,22 @@ namespace RogueCastleEditor
                 {
                     foreach (GameObj obj in objList)
                     {
-                        obj.Opacity = 0.1f;
-                        obj.Draw(m_camera);
+                        if ((obj is SpriteObj && DisplaySpriteObjs == true) || (!(obj is SpriteObj) && DisplayCollHulls == true))
+                        {
+                            obj.Opacity = 0.1f;
+                            obj.Draw(m_camera);
+                        }
                     }
                 }
             }
 
             foreach (GameObj obj in activeLayer)
             {
-                obj.Opacity = 1.0f;
-                obj.Draw(m_camera);
+                if ((obj is SpriteObj && DisplaySpriteObjs == true) || (!(obj is SpriteObj) && DisplayCollHulls == true))
+                {
+                    obj.Opacity = 1.0f;
+                    obj.Draw(m_camera);
+                }
             }
 
 

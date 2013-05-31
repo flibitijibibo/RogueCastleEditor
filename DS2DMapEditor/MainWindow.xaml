@@ -252,6 +252,8 @@
                 <MenuItem Header="_Selection Tool">
                     <MenuItem Name="XAML_selectCollHullsItem" Header="Select _Collision Hulls" IsCheckable="True" IsChecked="True" Click="SelectCollHulls_Clicked" />
                     <MenuItem Name="XAML_selectSpriteObjsItem" Header="Select _Sprites" IsCheckable="True" IsChecked="True" Click="SelectSprites_Clicked" />
+                    <MenuItem Name="XAML_displayCollHullsItem" Header="Display Collision _Hulls" IsCheckable="True" IsChecked="True" Click="DisplayCollHulls_Clicked" />
+                    <MenuItem Name="XAML_displaySpriteObjsItem" Header="Display S_prites" IsCheckable="True" IsChecked="True" Click="DisplaySprites_Clicked" />
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_Layers" />

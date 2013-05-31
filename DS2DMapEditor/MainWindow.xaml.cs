@@ -222,7 +222,16 @@ namespace RogueCastleEditor
         {
             XAML_mapDisplayXnaControl.SelectSpriteObjs = XAML_selectSpriteObjsItem.IsChecked;
         }
-       
+
+        private void DisplayCollHulls_Clicked(object sender, RoutedEventArgs e)
+        {
+            XAML_mapDisplayXnaControl.DisplayCollHulls = XAML_displayCollHullsItem.IsChecked;
+        }
+
+        private void DisplaySprites_Clicked(object sender, RoutedEventArgs e)
+        {
+            XAML_mapDisplayXnaControl.DisplaySpriteObjs = XAML_displaySpriteObjsItem.IsChecked;
+        }
        
         private void Directories_Clicked(object sender, RoutedEventArgs e)
         {

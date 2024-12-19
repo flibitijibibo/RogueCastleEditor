@@ -2,6 +2,9 @@
 
 This is the editor used to make the level files for Rogue Legacy 1.
 
+The source code to the game can be found
+[here](https://github.com/flibitijibibo/RogueLegacy1).
+
 ## License
 
 Rogue Legacy's source code is released under a specialized, non-commercial-use
